@@ -109,7 +109,7 @@ pa = load_dataset("eoil/K-SORI", "PA")
 | Rooms | R1 (6.0×7.2×2.7 m), R2 (6.3×6.5×2.7 m) |
 | Loudspeakers | LG gram (laptop), Sony Bluetooth speaker |
 | Microphones | Logitech BRIO, IRIVER headphones, BLUE Yeti, Waycos Croad, Samsung Galaxy Book |
-| Simulated | RIRs from [ReplayDF](https://github.com/piotrkawa/deepfake-whisper-features) |
+| Simulated | RIRs from [ReplayDF](https://huggingface.co/datasets/mueller91/ReplayDF) |
 
 ---
 
