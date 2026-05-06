@@ -58,45 +58,45 @@ pa = load_dataset("eoil/K-SORI", "PA")
 
 | ID | Model | Category |
 |----|-------|----------|
-| A01 | Zonos (v0.1-hybrid) | Zero-shot TTS |
-| A02 | GPT-SoVITS | Zero-shot TTS |
-| A03 | Coqui-ai | Zero-shot TTS |
-| A04 | Zonos (v0.1-transformer) | Zero-shot TTS |
-| A05 | ElevenLabs (multilingual v2) | Commercial TTS |
-| A06 | seed-vc | Zero-shot VC |
-| A07 | ElevenLabs (multilingual v2) | Commercial VC |
-| A08 | Coqui-ai | Zero-shot VC |
-| A09 | Partially Fake | Partial fake |
-| A10 | VoiceCraft | Speech editing |
-| A11 | VITS | Fully-trained TTS |
-| A12 | MeloTTS | Fully-trained TTS |
-| A13 | OpenVoice | Zero-shot TTS |
-| A14 | CosyVoice | Zero-shot TTS |
-| A15 | Kits.ai | Commercial VC |
-| A16 | VALL-E | Zero-shot TTS |
-| A17 | Chatterbox | Zero-shot TTS |
-| A18 | SSR-Speech | Speech editing |
-| A19 | PartialEdit | Speech editing |
-| A20 | IMS-Toucan | Zero-shot TTS |
-| A21 | FAKEBOB | Adversarial (ASV target) |
-| A22 | Double-deceiver | Adversarial (SASV target) |
+| A01 | [Zonos (v0.1-hybrid)](https://github.com/Zyphra/Zonos) | Zero-shot TTS |
+| A02 | [GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS) | Zero-shot TTS |
+| A03 | [Coqui-ai TTS](https://github.com/coqui-ai/TTS) | Zero-shot TTS |
+| A04 | [Zonos (v0.1-transformer)](https://github.com/Zyphra/Zonos) | Zero-shot TTS |
+| A05 | [ElevenLabs (multilingual v2)](https://elevenlabs.io/) | Commercial TTS |
+| A06 | [seed-vc](https://github.com/Plachtaa/seed-vc) | Zero-shot VC |
+| A07 | [ElevenLabs (multilingual v2)](https://elevenlabs.io/) | Commercial VC |
+| A08 | [Coqui-ai TTS (VITS fine-tuned)](https://github.com/ylacombe/finetune-hf-vits) | Zero-shot VC |
+| A09 | [Partially Fake](https://github.com/2oil/partially_fake) | Partial fake |
+| A10 | [VoiceCraft](https://github.com/jasonppy/VoiceCraft) | Speech editing |
+| A11 | [VITS (fine-tuned)](https://github.com/ylacombe/finetune-hf-vits) | Fully-trained TTS |
+| A12 | [MeloTTS](https://github.com/myshell-ai/MeloTTS) | Fully-trained TTS |
+| A13 | [OpenVoice](https://github.com/myshell-ai/OpenVoice) | Zero-shot TTS |
+| A14 | [CosyVoice](https://github.com/FunAudioLLM/CosyVoice) | Zero-shot TTS |
+| A15 | [Kits.ai](https://www.kits.ai/ko/) | Commercial VC |
+| A16 | [VALL-E (Korean)](https://huggingface.co/LearnItAnyway/vall-e_korean) | Zero-shot TTS |
+| A17 | [Chatterbox](https://github.com/resemble-ai/chatterbox) | Zero-shot TTS |
+| A18 | [SSR-Speech](https://github.com/WangHelin1997/SSR-Speech) | Speech editing |
+| A19 | [PartialEdit](https://github.com/ycemsubakan/speechbrain-1/tree/partial_edit) | Speech editing |
+| A20 | [IMS-Toucan](https://github.com/DigitalPhonetics/IMS-Toucan) | Zero-shot TTS |
+| A21 | [FAKEBOB](https://github.com/FAKEBOB-adversarial-attack/FAKEBOB) | Adversarial (ASV target) |
+| A22 | [Double-deceiver](https://github.com/joanna-janos/double-deceiver) | Adversarial (SASV target) |
 | A23 | A08 + A22 | Adversarial (SASV target) |
-| A24 | A05 + Malafide | Adversarial (CM target) |
-| A25 | Chatterbox | Zero-shot VC |
+| A24 | A05 + [Malafide](https://github.com/eurecom-asp/malafide) | Adversarial (CM target) |
+| A25 | [Chatterbox](https://github.com/resemble-ai/chatterbox) | Zero-shot VC |
 
 ### AI-Processed (P01–P09)
 
 | ID | Model | Category |
 |----|-------|----------|
-| P01 | BigCodec | Neural Codec |
-| P02 | EnCodec | Neural Codec |
-| P03 | SpeechTokenizer | Neural Codec |
-| P04 | FunCodec | Neural Codec |
-| P05 | AcademiCodec | Neural Codec |
-| P06 | Demucs | Speech Enhancement |
-| P07 | resemble-enhance | Speech Enhancement |
-| P08 | VoiceFixer | Speech Enhancement |
-| P09 | ClearerVoice-Studio | Speech Enhancement |
+| P01 | [BigCodec](https://github.com/Aria-K-Aleth/bigcodec) | Neural Codec |
+| P02 | [EnCodec](https://github.com/facebookresearch/encodec) | Neural Codec |
+| P03 | [SpeechTokenizer](https://github.com/ZhangXInFD/SpeechTokenizer) | Neural Codec |
+| P04 | [FunCodec](https://github.com/alibaba-damo-academy/FunCodec) | Neural Codec |
+| P05 | [AcademiCodec](https://github.com/yangdongchao/AcademiCodec) | Neural Codec |
+| P06 | [Demucs](https://github.com/facebookresearch/demucs) | Speech Enhancement |
+| P07 | [resemble-enhance](https://github.com/resemble-ai/resemble-enhance) | Speech Enhancement |
+| P08 | [VoiceFixer](https://github.com/haoheliu/voicefixer) | Speech Enhancement |
+| P09 | [ClearerVoice-Studio](https://github.com/modelscope/ClearerVoice-Studio) | Speech Enhancement |
 
 ---
 
