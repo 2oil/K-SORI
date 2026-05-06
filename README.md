@@ -63,9 +63,9 @@ pa = load_dataset("eoil/K-SORI", "PA")
 | A03 | [Coqui-ai TTS](https://github.com/coqui-ai/TTS) | Zero-shot TTS |
 | A04 | [Zonos (v0.1-transformer)](https://github.com/Zyphra/Zonos) | Zero-shot TTS |
 | A05 | [ElevenLabs (multilingual v2)](https://elevenlabs.io/) | Commercial TTS |
-| A06 | [seed-vc](https://github.com/Plachtaa/seed-vc) | Zero-shot VC |
-| A07 | [ElevenLabs (multilingual v2)](https://elevenlabs.io/) | Commercial VC |
-| A08 | [Coqui-ai TTS (VITS fine-tuned)](https://github.com/ylacombe/finetune-hf-vits) | Zero-shot VC |
+| A06 | [Coqui-ai TTS](https://github.com/coqui-ai/TTS) | Zero-shot VC |
+| A07 | [seed-vc](https://github.com/Plachtaa/seed-vc) | Zero-shot VC |
+| A08 | [ElevenLabs (multilingual v2)](https://elevenlabs.io/) | Commercial VC |
 | A09 | [Partially Fake](https://github.com/2oil/partially_fake) | Partial fake |
 | A10 | [VoiceCraft](https://github.com/jasonppy/VoiceCraft) | Speech editing |
 | A11 | [VITS (fine-tuned)](https://github.com/ylacombe/finetune-hf-vits) | Fully-trained TTS |
