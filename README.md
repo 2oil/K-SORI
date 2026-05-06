@@ -6,119 +6,170 @@
 
 [![HuggingFace](https://img.shields.io/badge/🤗%20Dataset-eoil%2FK--SORI-blue)](https://huggingface.co/datasets/eoil/K-SORI)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-green.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![Demo](https://img.shields.io/badge/🔊%20Audio-Demo-orange)](https://2oil.github.io/K-SORI/demo.html)
 
 </div>
 
 <p align="center">
-  <img src="Contribution.png" width="85%"/>
+  <img src="https://raw.githubusercontent.com/2oil/K-SORI/main/Contribution.png" width="85%"/>
 </p>
 
 ---
 
 ## Overview
 
-K-SORI is a large-scale **Korean** speech dataset for spoofing and anti-spoofing research. It covers two attack scenarios:
+K-SORI is a large-scale **Korean** speech dataset for spoofing-aware speaker verification (SASV) research. It covers both Logical Access (LA) and Physical Access (PA) attack scenarios, with four key characteristics:
+
+- **26 diverse attack types** — TTS, VC, speech editing, adversarial attacks, and more
+- **Mixed acoustic domains** — studio recordings + real-world (AIHub, YouTube, ITW)
+- **Large-scale speaker diversity** — 1,347 speakers, 3.4M+ utterances
+- **Flexible AI-processed evaluation** — 9 neural processing types (codec, enhancement)
 
 | Scenario | Description | Utterances |
 |----------|-------------|:----------:|
-| **Logical Access (LA)** | TTS/VC spoofed (a01–a25) + AI-processed (p01–p09) + bonafide (a00) | 2,819,449 |
-| **Physical Access (PA)** | Replay attacks — real rooms (R1, R2) + simulated RIRs | 593,252 |
-| **Total** | | **3,412,701** |
+| **LA** | TTS/VC spoofed (A01–A25) + AI-processed (P01–P09) + Bonafide | 2,819,449 |
+| **PA** | Replay attacks — real rooms (R1, R2) + simulated RIRs | 593,252 |
+| **Total** | 1,347 speakers | **3,412,701** |
 
-### LA breakdown
+---
 
-| Split | Type | Utterances |
-|-------|------|:----------:|
-| a00 | Bonafide | 234,067 |
-| a01–a25 | TTS / Voice Conversion | 1,951,899 |
-| p01–p09 | AI-processed speech | 633,483 |
+## Audio Demo
 
-### PA breakdown
-
-| Setting | Details |
-|---------|---------|
-| Rooms | R1, R2 (real) + simulated RIRs |
-| Microphones | IRIVER, BLUE, BRIO, CROAD, SAMSUNG |
-| Loudspeakers | gram (Kakao Mini), sony (SRS-XB13) |
-| Total utterances | 593,252 |
+> **[🔊 Listen to samples](https://2oil.github.io/K-SORI/demo.html)** — bonafide, spoofed, AI-processed, and replay samples per speaker
 
 ---
 
 ## Dataset
 
-The full dataset is available on HuggingFace:
-
-> **[🤗 eoil/K-SORI](https://huggingface.co/datasets/eoil/K-SORI)**
+> **[🤗 eoil/K-SORI on HuggingFace](https://huggingface.co/datasets/eoil/K-SORI)**
 
 ```python
 from datasets import load_dataset
 
-# Logical Access
 la = load_dataset("eoil/K-SORI", "LA")
-
-# Physical Access
 pa = load_dataset("eoil/K-SORI", "PA")
 ```
 
 ---
 
+## LA Attack Types
+
+### Spoofed (A01–A25)
+
+| ID | Model | Category |
+|----|-------|----------|
+| A01 | Zonos (v0.1-hybrid) | Zero-shot TTS |
+| A02 | GPT-SoVITS | Zero-shot TTS |
+| A03 | Coqui-ai | Zero-shot TTS |
+| A04 | Zonos (v0.1-transformer) | Zero-shot TTS |
+| A05 | ElevenLabs (multilingual v2) | Commercial TTS |
+| A06 | seed-vc | Zero-shot VC |
+| A07 | ElevenLabs (multilingual v2) | Commercial VC |
+| A08 | Coqui-ai | Zero-shot VC |
+| A09 | Partially Fake | Partial fake |
+| A10 | VoiceCraft | Speech editing |
+| A11 | VITS | Fully-trained TTS |
+| A12 | MeloTTS | Fully-trained TTS |
+| A13 | OpenVoice | Zero-shot TTS |
+| A14 | CosyVoice | Zero-shot TTS |
+| A15 | Kits.ai | Commercial VC |
+| A16 | VALL-E | Zero-shot TTS |
+| A17 | Chatterbox | Zero-shot TTS |
+| A18 | SSR-Speech | Speech editing |
+| A19 | PartialEdit | Speech editing |
+| A20 | IMS-Toucan | Zero-shot TTS |
+| A21 | FAKEBOB | Adversarial (ASV target) |
+| A22 | Double-deceiver | Adversarial (SASV target) |
+| A23 | A08 + A22 | Adversarial (SASV target) |
+| A24 | A05 + Malafide | Adversarial (CM target) |
+| A25 | Chatterbox | Zero-shot VC |
+
+### AI-Processed (P01–P09)
+
+| ID | Model | Category |
+|----|-------|----------|
+| P01 | BigCodec | Neural Codec |
+| P02 | EnCodec | Neural Codec |
+| P03 | SpeechTokenizer | Neural Codec |
+| P04 | FunCodec | Neural Codec |
+| P05 | AcademiCodec | Neural Codec |
+| P06 | Demucs | Speech Enhancement |
+| P07 | resemble-enhance | Speech Enhancement |
+| P08 | VoiceFixer | Speech Enhancement |
+| P09 | ClearerVoice-Studio | Speech Enhancement |
+
+---
+
+## PA Conditions
+
+116 distinct playback/recording conditions across physical and simulated environments.
+
+| Setting | Details |
+|---------|---------|
+| Rooms | R1 (6.0×7.2×2.7 m), R2 (6.3×6.5×2.7 m) |
+| Loudspeakers | LG gram (laptop), Sony Bluetooth speaker |
+| Microphones | Logitech BRIO, IRIVER headphones, BLUE Yeti, Waycos Croad, Samsung Galaxy Book |
+| Simulated | RIRs from [ReplayDF](https://github.com/piotrkawa/deepfake-whisper-features) |
+
+---
+
 ## Protocol Files
 
-Protocol CSVs are available in the [`protocol/`](protocol/) directory.
+All protocol CSVs are in the [`protocol/`](protocol/) directory.
 
 ### Scenario Protocols
 
 | File | Description | Rows |
 |------|-------------|:----:|
-| `K-SASV_LA_protocol.csv` | Full LA protocol (a00–a25, p01–p09) | 2,819,449 |
+| `K-SASV_LA_protocol.csv` | Full LA protocol (A00–A25, P01–P09) | 2,819,449 |
 | `K-SASV_PA_protocol.csv` | Full PA protocol (real + simulated replay) | 593,252 |
 
 ### Training Protocols
 
-#### Standard (TTS/VC spoofing only)
+#### Standard CM (A01–A21 only)
 
 | File | Split | Rows |
 |------|-------|:----:|
 | `K-SASV_train.csv` | Train | 1,652,172 |
 | `K-SASV_eval.csv` | Eval | 308,833 |
 
-#### Extended (includes AI-processed speech)
+#### Extended — includes AI-processed speech (P01–P09)
 
 | File | Scenario | Split | Rows |
 |------|----------|-------|:----:|
-| `K-SASV_train_spoofing.csv` | Spoofing | Train | 2,066,045 |
-| `K-SASV_eval_spoofing.csv` | Spoofing | Eval | 528,443 |
-| `K-SASV_train_deepfake.csv` | Deepfake | Train | 2,066,045 |
-| `K-SASV_eval_deepfake.csv` | Deepfake | Eval | 528,443 |
+| `K-SASV_train_spoofing.csv` | Spoofing detection | Train | 2,066,045 |
+| `K-SASV_eval_spoofing.csv` | Spoofing detection | Eval | 528,443 |
+| `K-SASV_train_deepfake.csv` | Deepfake detection | Train | 2,066,045 |
+| `K-SASV_eval_deepfake.csv` | Deepfake detection | Eval | 528,443 |
 
-**Column descriptions (LA)**
+**Column descriptions**
 
 | Column | Description |
 |--------|-------------|
 | `speaker_norm` | Normalized speaker ID |
 | `path_audio` | Relative path to audio file |
 | `age` | Speaker age group (Young / Adult / Elder) |
-| `gender` | Speaker gender (M / F) |
-| `recrdTime` | Recording duration (s) |
+| `gender` | M / F |
+| `recrdTime` | Recording duration (seconds) |
 | `recrdEnv` | Recording environment |
 | `recrdDevice` | Recording device |
-| `type` | Attack type (a00 = bonafide, a01–a25, p01–p09) |
-| `label` | bonafide / spoof / AI-processed |
+| `type` | Attack type (`-`=bonafide, A01–A25, P01–P09) |
+| `label` | `bonafide` / `spoof` / `AI-processed` |
 
 ---
 
 ## Pretrained Models
 
-Models trained on K-SORI LA are available on Google Drive:
+Models trained on K-SORI LA — available on Google Drive:
 
 > **[📁 Google Drive — Pretrained Models](https://drive.google.com/drive/folders/1df5XEI54WAhug-su2nOGOd84q7JV7ghC?usp=sharing)**
 
-| Model | Base Repository |
-|-------|----------------|
+| Model | Paper / Code |
+|-------|-------------|
 | AASIST | [clovaai/aasist](https://github.com/clovaai/aasist) |
 | Conformer-TCM | [ductuantruong/tcm_add](https://github.com/ductuantruong/tcm_add) |
 
-Training followed the original configurations with K-SORI LA protocols as drop-in replacements.
+Training followed original configurations with K-SORI LA protocols as drop-in replacements.
 
 ---
 

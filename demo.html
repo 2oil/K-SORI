@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>K-SORI Audio Samples</title>
+<style>
+  :root {
+    --blue: #2563eb; --green: #16a34a; --orange: #ea580c;
+    --purple: #7c3aed; --red: #dc2626; --gray: #6b7280;
+    --bg: #f9fafb; --card: #ffffff; --border: #e5e7eb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+         background: var(--bg); color: #111827; }
+  header { background: #1e293b; color: white; padding: 2rem 2rem 1.5rem;
+           text-align: center; }
+  header h1 { font-size: 1.8rem; font-weight: 700; letter-spacing: -.5px; }
+  header p  { margin-top: .4rem; color: #94a3b8; font-size: .95rem; }
+  header a  { color: #60a5fa; text-decoration: none; }
+  .legend { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center;
+            padding: 1.2rem 2rem; background: #1e293b; border-top: 1px solid #334155; }
+  .badge { font-size: .75rem; font-weight: 600; padding: .25rem .6rem;
+           border-radius: 9999px; color: white; }
+  .b-bona   { background: var(--green); }
+  .b-spoof  { background: var(--red); }
+  .b-ai     { background: var(--purple); }
+  .b-pa     { background: var(--orange); }
+
+  main { max-width: 1100px; margin: 2rem auto; padding: 0 1rem 4rem; }
+  .speaker-block { background: var(--card); border: 1px solid var(--border);
+                   border-radius: 12px; margin-bottom: 2rem;
+                   box-shadow: 0 1px 3px rgba(0,0,0,.06); overflow: hidden; }
+  .speaker-header { background: #f1f5f9; padding: .9rem 1.4rem;
+                    display: flex; align-items: center; gap: .8rem;
+                    border-bottom: 1px solid var(--border); }
+  .speaker-id { font-size: 1.05rem; font-weight: 700; color: #1e293b; }
+  .speaker-meta { font-size: .8rem; color: var(--gray); }
+
+  .section-label { font-size: .7rem; font-weight: 700; text-transform: uppercase;
+                   letter-spacing: .08em; color: var(--gray); padding: .9rem 1.4rem .3rem;
+                   border-top: 1px solid var(--border); }
+  .section-label:first-of-type { border-top: none; }
+
+  .samples-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                  gap: .75rem; padding: .6rem 1.4rem 1.2rem; }
+  .sample-card { border: 1px solid var(--border); border-radius: 8px; padding: .75rem;
+                 background: #fafafa; }
+  .sample-top  { display: flex; align-items: center; gap: .5rem; margin-bottom: .5rem; }
+  .sample-type { font-size: .72rem; font-weight: 700; padding: .15rem .45rem;
+                 border-radius: 4px; color: white; white-space: nowrap; }
+  .t-bona  { background: var(--green); }
+  .t-spoof { background: var(--red); }
+  .t-ai    { background: var(--purple); }
+  .t-pa    { background: var(--orange); }
+  .sample-name { font-size: .82rem; font-weight: 600; color: #374151; }
+  .sample-desc { font-size: .72rem; color: var(--gray); margin-bottom: .5rem; line-height: 1.4; }
+  audio { width: 100%; height: 32px; }
+  audio::-webkit-media-controls-panel { background: #f1f5f9; }
+
+  footer { text-align: center; color: var(--gray); font-size: .82rem; padding: 2rem; }
+  footer a { color: var(--blue); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>K-SORI &mdash; Audio Demo</h1>
+  <p>Korean Speech anti-spOofing Research dataset &nbsp;|&nbsp;
+     <a href="https://huggingface.co/datasets/eoil/K-SORI">🤗 HuggingFace</a> &nbsp;|&nbsp;
+     <a href="https://github.com/2oil/K-SORI">GitHub</a>
+  </p>
+</header>
+
+<div class="legend">
+  <span class="badge b-bona">Bonafide</span>
+  <span class="badge b-spoof">Spoofed (TTS / VC / Adversarial / Partial)</span>
+  <span class="badge b-ai">AI-Processed</span>
+  <span class="badge b-pa">Physical Access (Replay)</span>
+</div>
+
+<main>
+
+<script>
+const SPEAKERS = [
+  { id: "ITW_00001", gender: "M", env: "In-the-Wild" },
+  { id: "ITW_00002", gender: "F", env: "In-the-Wild" },
+  { id: "ITW_00003", gender: "M", env: "In-the-Wild" },
+];
+
+const SECTIONS = [
+  {
+    label: "Bonafide",
+    items: [
+      { type: "a00", cls: "t-bona", name: "Bonafide", desc: "Original speaker recording" },
+    ]
+  },
+  {
+    label: "Spoofed — LA (A01–A25)",
+    items: [
+      { type: "a01", cls: "t-spoof", name: "A01 · Zonos TTS", desc: "Zero-shot TTS (Zonos-v0.1-hybrid)" },
+      { type: "a06", cls: "t-spoof", name: "A06 · seed-vc", desc: "Zero-shot Voice Conversion" },
+      { type: "a09", cls: "t-spoof", name: "A09 · Partially Fake", desc: "Partial speech manipulation" },
+      { type: "a17", cls: "t-spoof", name: "A17 · Chatterbox", desc: "Zero-shot TTS" },
+    ]
+  },
+  {
+    label: "AI-Processed — P01–P09",
+    items: [
+      { type: "p01", cls: "t-ai", name: "P01 · BigCodec", desc: "Neural codec (non-malicious)" },
+      { type: "p06", cls: "t-ai", name: "P06 · Demucs", desc: "Speech enhancement" },
+    ]
+  },
+  {
+    label: "Physical Access — Replay Attack",
+    items: [
+      { type: "pa_replay", cls: "t-pa", name: "PA · IRIVER (R1)", desc: "Replay via IRIVER headphones, Room 1" },
+    ]
+  },
+];
+
+const main = document.querySelector("main");
+
+for (const spk of SPEAKERS) {
+  const block = document.createElement("div");
+  block.className = "speaker-block";
+  block.innerHTML = `
+    <div class="speaker-header">
+      <span class="speaker-id">${spk.id}</span>
+      <span class="speaker-meta">${spk.gender} &nbsp;·&nbsp; ${spk.env}</span>
+    </div>`;
+
+  for (const sec of SECTIONS) {
+    const label = document.createElement("div");
+    label.className = "section-label";
+    label.textContent = sec.label;
+    block.appendChild(label);
+
+    const grid = document.createElement("div");
+    grid.className = "samples-grid";
+
+    for (const item of sec.items) {
+      const src = `samples/${spk.id}/${item.type}.mp3`;
+      grid.innerHTML += `
+        <div class="sample-card">
+          <div class="sample-top">
+            <span class="sample-type ${item.cls}">${item.type.toUpperCase()}</span>
+            <span class="sample-name">${item.name}</span>
+          </div>
+          <div class="sample-desc">${item.desc}</div>
+          <audio controls preload="none">
+            <source src="${src}" type="audio/mpeg"/>
+          </audio>
+        </div>`;
+    }
+    block.appendChild(grid);
+  }
+  main.appendChild(block);
+}
+</script>
+
+</main>
+
+<footer>
+  <p>K-SORI &mdash; NeurIPS 2026 Submission &nbsp;|&nbsp;
+     <a href="https://huggingface.co/datasets/eoil/K-SORI">Dataset</a> &nbsp;|&nbsp;
+     <a href="https://github.com/2oil/K-SORI">GitHub</a>
+  </p>
+</footer>
+</body>
+</html>
