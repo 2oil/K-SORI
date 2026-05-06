@@ -2,7 +2,7 @@
 
 # K-SORI
 
-**Korean Speech anti-spOofing Research dataset with In-the-wild recordings**
+**Korean Speech Dataset for Overall Robustness in SASV**
 
 [![HuggingFace](https://img.shields.io/badge/🤗%20Dataset-eoil%2FK--SORI-blue)](https://huggingface.co/datasets/eoil/K-SORI)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-green.svg)](https://creativecommons.org/licenses/by/4.0/)
