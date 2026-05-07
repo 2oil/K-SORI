@@ -430,8 +430,8 @@ for (const spk of SPEAKERS) {
     <div class="speaker-header">
       <div class="spk-avatar">${spk.gender === "F" ? "♀" : "♂"}</div>
       <div class="spk-info">
-        <div class="spk-label">${spk.label}</div>
-        <div class="spk-meta">${spk.gender === "F" ? "Female" : "Male"} &nbsp;·&nbsp; ID: ${spk.id}</div>
+        <div class="spk-label">Speaker ${spk.id}</div>
+        <div class="spk-meta">${spk.env} &nbsp;·&nbsp; ${spk.gender === "F" ? "Female" : "Male"}</div>
       </div>
       <span class="spk-tag">${spk.desc}</span>
     </div>`;
@@ -466,15 +466,11 @@ for (const spk of SPEAKERS) {
   AI_PROCESSED.forEach(a => { g2.innerHTML += card(spk.id, a, "t-ai", "c-ai"); });
   block.appendChild(g2);
 
-  /* PA Attack — per speaker, 6 settings */
+  /* PA Attack — section label only, no audio cards shown */
   const lb3 = document.createElement("div");
   lb3.className = "section-label";
   lb3.innerHTML = `<span class="sec-badge b-pa">PA Attack</span>Replay Attack — 6 Room / Device Settings<span class="sec-count">diverse room &amp; mic conditions</span>`;
   block.appendChild(lb3);
-  const g3 = document.createElement("div");
-  g3.className = "pa-sub-grid";
-  PA_ATTACKS.forEach(a => { g3.innerHTML += paCard(spk.id, a); });
-  block.appendChild(g3);
 
   main.appendChild(block);
 }
