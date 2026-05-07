@@ -195,12 +195,9 @@ const AI_PROCESSED = [
   { id:"p09", name:"P09 · ClearerVoice",     cat:"Enhancement",  desc:"ClearerVoice-Studio (ModelScope)",     hasAudio:false },
 ];
 
-/* PA Attack — real room recordings only (simulated RIRs excluded)
-   To add more: place pa_r1_sony.mp3 / pa_r2_brio.mp3 in samples/{spk_id}/ */
+/* PA Attack — real room recordings only (simulated RIRs excluded) */
 const PA_ATTACKS = [
-  { id:"pa_replay",  name:"LG gram · Room 1",        cat:"Laptop Speaker", desc:"Laptop speaker playback, Room 1 (6.0×7.2×2.7 m)", hasAudio:true  },
-  { id:"pa_r1_sony", name:"Sony BT Speaker · Room 1", cat:"BT Speaker",    desc:"Bluetooth speaker replay, Room 1",                 hasAudio:false },
-  { id:"pa_r2_brio", name:"Logitech BRIO · Room 2",   cat:"Webcam Mic",    desc:"Webcam mic recording, Room 2 (6.3×6.5×2.7 m)",    hasAudio:false },
+  { id:"pa_replay", name:"LG gram · Room 1", cat:"Laptop Speaker", desc:"Laptop speaker playback, Room 1 (6.0×7.2×2.7 m)", hasAudio:true },
 ];
 
 function card(spkId, item, tcls) {
@@ -223,9 +220,12 @@ const main = document.querySelector("main");
 for (const spk of SPEAKERS) {
   const rng = mkRng(spk.seed);
 
-  /* Shuffle LA; keep audio-available items first within shuffled order */
-  const laShuffled = shuffle(LA_ATTACKS, rng);
-  const laOrdered  = [...laShuffled.filter(a => a.hasAudio), ...laShuffled.filter(a => !a.hasAudio)];
+  /* Shuffle LA; audio-available first, pick 3 random ones to show upfront */
+  const laShuffled    = shuffle(LA_ATTACKS, rng);
+  const laWithAudio   = laShuffled.filter(a => a.hasAudio);
+  const laWithoutAudio = laShuffled.filter(a => !a.hasAudio);
+  const laOrdered     = [...laWithAudio, ...laWithoutAudio];
+  const laInitCount   = Math.min(3, laWithAudio.length);
 
   const block = document.createElement("div");
   block.className = "speaker-block";
@@ -258,8 +258,8 @@ for (const spk of SPEAKERS) {
 
   const laGrid = document.createElement("div");
   laGrid.className = "samples-grid";
-  const laShow  = laOrdered.slice(0, 4);
-  const laExtra = laOrdered.slice(4);
+  const laShow  = laOrdered.slice(0, laInitCount);
+  const laExtra = laOrdered.slice(laInitCount);
   laShow.forEach(a => { laGrid.innerHTML += card(spk.id, a, "t-la"); });
   laExtra.forEach(a => {
     const tmp = document.createElement("div");
