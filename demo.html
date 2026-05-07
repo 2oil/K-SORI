@@ -77,8 +77,7 @@
   /* ── Sample card ─────────────────────────── */
   .sample-card { border: 1px solid var(--border); border-radius: 10px; padding: .7rem;
                  background: #fafafa; transition: box-shadow .15s; }
-  .sample-card:hover:not(.unavailable) { box-shadow: 0 3px 10px rgba(0,0,0,.09); }
-  .sample-card.unavailable { opacity: .42; }
+  .sample-card:hover { box-shadow: 0 3px 10px rgba(0,0,0,.09); }
   .sample-top  { display: flex; align-items: center; gap: .4rem; margin-bottom: .3rem; }
   .sample-type { font-size: .66rem; font-weight: 700; padding: .12rem .42rem;
                  border-radius: 4px; color: white; white-space: nowrap; }
@@ -90,17 +89,6 @@
   .sample-cat  { font-size: .66rem; color: var(--muted); font-style: italic; margin-bottom: .25rem; }
   .sample-desc { font-size: .7rem; color: var(--muted); margin-bottom: .4rem; line-height: 1.4; }
   audio { width: 100%; height: 30px; display: block; }
-  .unavail-tag { font-size: .68rem; color: var(--gray); text-align: center;
-                 padding: .25rem; border: 1px dashed #d1d5db; border-radius: 6px;
-                 margin-top: .2rem; }
-
-  /* ── Show-more toggle ────────────────────── */
-  .show-more { display: flex; justify-content: center; padding: .1rem 1.5rem .9rem; }
-  .show-more button { font-size: .76rem; color: var(--blue);
-                      background: none; border: 1px solid #bfdbfe;
-                      border-radius: 8px; padding: .3rem 1rem; cursor: pointer;
-                      transition: background .15s; }
-  .show-more button:hover { background: #eff6ff; }
 
   /* ── Footer ──────────────────────────────── */
   footer { text-align: center; color: var(--muted); font-size: .82rem;
@@ -155,44 +143,44 @@ const SPEAKERS = [
 
 /* LA Attack types A01–A25 */
 const LA_ATTACKS = [
-  { id:"a01", name:"A01 · Zonos TTS",          cat:"Zero-shot TTS",    desc:"Zonos-v0.1-hybrid",                             hasAudio:true  },
-  { id:"a02", name:"A02 · GPT-SoVITS",         cat:"Zero-shot TTS",    desc:"GPT-SoVITS",                                    hasAudio:false },
-  { id:"a03", name:"A03 · Coqui TTS",           cat:"Zero-shot TTS",    desc:"Coqui-ai TTS",                                  hasAudio:false },
-  { id:"a04", name:"A04 · Zonos (transformer)", cat:"Zero-shot TTS",    desc:"Zonos-v0.1-transformer",                        hasAudio:false },
-  { id:"a05", name:"A05 · ElevenLabs TTS",      cat:"Commercial TTS",   desc:"ElevenLabs multilingual v2",                    hasAudio:false },
-  { id:"a06", name:"A06 · Coqui VC",            cat:"Zero-shot VC",     desc:"Coqui-ai TTS (voice conversion mode)",          hasAudio:true  },
-  { id:"a07", name:"A07 · seed-vc",             cat:"Zero-shot VC",     desc:"seed-vc",                                       hasAudio:false },
-  { id:"a08", name:"A08 · ElevenLabs VC",       cat:"Commercial VC",    desc:"ElevenLabs multilingual v2 (VC mode)",          hasAudio:false },
-  { id:"a09", name:"A09 · Partially Fake",      cat:"Partial Fake",     desc:"Partial speech manipulation",                   hasAudio:true  },
-  { id:"a10", name:"A10 · VoiceCraft",          cat:"Speech Editing",   desc:"VoiceCraft",                                    hasAudio:false },
-  { id:"a11", name:"A11 · VITS",                cat:"Fully-trained TTS",desc:"VITS (fine-tuned)",                             hasAudio:false },
-  { id:"a12", name:"A12 · MeloTTS",             cat:"Fully-trained TTS",desc:"MeloTTS",                                       hasAudio:false },
-  { id:"a13", name:"A13 · OpenVoice",           cat:"Zero-shot TTS",    desc:"OpenVoice",                                     hasAudio:false },
-  { id:"a14", name:"A14 · CosyVoice",           cat:"Zero-shot TTS",    desc:"CosyVoice",                                     hasAudio:false },
-  { id:"a15", name:"A15 · Kits.ai",             cat:"Commercial VC",    desc:"Kits.ai voice conversion",                      hasAudio:false },
-  { id:"a16", name:"A16 · VALL-E (Korean)",     cat:"Zero-shot TTS",    desc:"VALL-E Korean",                                 hasAudio:false },
-  { id:"a17", name:"A17 · Chatterbox TTS",      cat:"Zero-shot TTS",    desc:"Chatterbox (Resemble AI)",                      hasAudio:true  },
-  { id:"a18", name:"A18 · SSR-Speech",          cat:"Speech Editing",   desc:"SSR-Speech",                                    hasAudio:false },
-  { id:"a19", name:"A19 · PartialEdit",         cat:"Speech Editing",   desc:"PartialEdit (SpeechBrain)",                     hasAudio:false },
-  { id:"a20", name:"A20 · IMS-Toucan",          cat:"Zero-shot TTS",    desc:"IMS-Toucan",                                    hasAudio:false },
-  { id:"a21", name:"A21 · FAKEBOB",             cat:"Adversarial",      desc:"Adversarial attack (ASV target)",               hasAudio:false },
-  { id:"a22", name:"A22 · Double-deceiver",     cat:"Adversarial",      desc:"Adversarial attack (SASV target)",              hasAudio:false },
-  { id:"a23", name:"A23 · A08+A22",             cat:"Adversarial",      desc:"ElevenLabs VC + Double-deceiver (SASV target)", hasAudio:false },
-  { id:"a24", name:"A24 · A05+Malafide",        cat:"Adversarial",      desc:"ElevenLabs TTS + Malafide (CM target)",         hasAudio:false },
-  { id:"a25", name:"A25 · Chatterbox VC",       cat:"Zero-shot VC",     desc:"Chatterbox (Resemble AI, VC mode)",             hasAudio:false },
+  { id:"a01", name:"A01 · Zonos TTS",          cat:"Zero-shot TTS",    desc:"Zonos-v0.1-hybrid"                             },
+  { id:"a02", name:"A02 · GPT-SoVITS",         cat:"Zero-shot TTS",    desc:"GPT-SoVITS"                                    },
+  { id:"a03", name:"A03 · Coqui TTS",           cat:"Zero-shot TTS",    desc:"Coqui-ai TTS"                                  },
+  { id:"a04", name:"A04 · Zonos (transformer)", cat:"Zero-shot TTS",    desc:"Zonos-v0.1-transformer"                        },
+  { id:"a05", name:"A05 · ElevenLabs TTS",      cat:"Commercial TTS",   desc:"ElevenLabs multilingual v2"                    },
+  { id:"a06", name:"A06 · Coqui VC",            cat:"Zero-shot VC",     desc:"Coqui-ai TTS (voice conversion mode)"          },
+  { id:"a07", name:"A07 · seed-vc",             cat:"Zero-shot VC",     desc:"seed-vc"                                       },
+  { id:"a08", name:"A08 · ElevenLabs VC",       cat:"Commercial VC",    desc:"ElevenLabs multilingual v2 (VC mode)"          },
+  { id:"a09", name:"A09 · Partially Fake",      cat:"Partial Fake",     desc:"Partial speech manipulation"                   },
+  { id:"a10", name:"A10 · VoiceCraft",          cat:"Speech Editing",   desc:"VoiceCraft"                                    },
+  { id:"a11", name:"A11 · VITS",                cat:"Fully-trained TTS",desc:"VITS (fine-tuned)"                             },
+  { id:"a12", name:"A12 · MeloTTS",             cat:"Fully-trained TTS",desc:"MeloTTS"                                       },
+  { id:"a13", name:"A13 · OpenVoice",           cat:"Zero-shot TTS",    desc:"OpenVoice"                                     },
+  { id:"a14", name:"A14 · CosyVoice",           cat:"Zero-shot TTS",    desc:"CosyVoice"                                     },
+  { id:"a15", name:"A15 · Kits.ai",             cat:"Commercial VC",    desc:"Kits.ai voice conversion"                      },
+  { id:"a16", name:"A16 · VALL-E (Korean)",     cat:"Zero-shot TTS",    desc:"VALL-E Korean"                                 },
+  { id:"a17", name:"A17 · Chatterbox TTS",      cat:"Zero-shot TTS",    desc:"Chatterbox (Resemble AI)"                      },
+  { id:"a18", name:"A18 · SSR-Speech",          cat:"Speech Editing",   desc:"SSR-Speech"                                    },
+  { id:"a19", name:"A19 · PartialEdit",         cat:"Speech Editing",   desc:"PartialEdit (SpeechBrain)"                     },
+  { id:"a20", name:"A20 · IMS-Toucan",          cat:"Zero-shot TTS",    desc:"IMS-Toucan"                                    },
+  { id:"a21", name:"A21 · FAKEBOB",             cat:"Adversarial",      desc:"Adversarial attack (ASV target)"               },
+  { id:"a22", name:"A22 · Double-deceiver",     cat:"Adversarial",      desc:"Adversarial attack (SASV target)"              },
+  { id:"a23", name:"A23 · A08+A22",             cat:"Adversarial",      desc:"ElevenLabs VC + Double-deceiver (SASV target)" },
+  { id:"a24", name:"A24 · A05+Malafide",        cat:"Adversarial",      desc:"ElevenLabs TTS + Malafide (CM target)"         },
+  { id:"a25", name:"A25 · Chatterbox VC",       cat:"Zero-shot VC",     desc:"Chatterbox (Resemble AI, VC mode)"             },
 ];
 
 /* AI-Processed P01–P09 */
 const AI_PROCESSED = [
-  { id:"p01", name:"P01 · BigCodec",         cat:"Neural Codec", desc:"BigCodec neural speech codec",         hasAudio:true  },
-  { id:"p02", name:"P02 · EnCodec",          cat:"Neural Codec", desc:"EnCodec (Meta)",                       hasAudio:false },
-  { id:"p03", name:"P03 · SpeechTokenizer",  cat:"Neural Codec", desc:"SpeechTokenizer",                      hasAudio:false },
-  { id:"p04", name:"P04 · FunCodec",         cat:"Neural Codec", desc:"FunCodec (Alibaba DAMO)",              hasAudio:false },
-  { id:"p05", name:"P05 · AcademiCodec",     cat:"Neural Codec", desc:"AcademiCodec",                         hasAudio:false },
-  { id:"p06", name:"P06 · Demucs",           cat:"Enhancement",  desc:"Speech enhancement (Meta Demucs)",     hasAudio:true  },
-  { id:"p07", name:"P07 · resemble-enhance", cat:"Enhancement",  desc:"Speech enhancement (Resemble AI)",     hasAudio:false },
-  { id:"p08", name:"P08 · VoiceFixer",       cat:"Enhancement",  desc:"Speech restoration (VoiceFixer)",      hasAudio:false },
-  { id:"p09", name:"P09 · ClearerVoice",     cat:"Enhancement",  desc:"ClearerVoice-Studio (ModelScope)",     hasAudio:false },
+  { id:"p01", name:"P01 · BigCodec",         cat:"Neural Codec", desc:"BigCodec neural speech codec"        },
+  { id:"p02", name:"P02 · EnCodec",          cat:"Neural Codec", desc:"EnCodec (Meta)"                      },
+  { id:"p03", name:"P03 · SpeechTokenizer",  cat:"Neural Codec", desc:"SpeechTokenizer"                     },
+  { id:"p04", name:"P04 · FunCodec",         cat:"Neural Codec", desc:"FunCodec (Alibaba DAMO)"             },
+  { id:"p05", name:"P05 · AcademiCodec",     cat:"Neural Codec", desc:"AcademiCodec"                        },
+  { id:"p06", name:"P06 · Demucs",           cat:"Enhancement",  desc:"Speech enhancement (Meta Demucs)"    },
+  { id:"p07", name:"P07 · resemble-enhance", cat:"Enhancement",  desc:"Speech enhancement (Resemble AI)"    },
+  { id:"p08", name:"P08 · VoiceFixer",       cat:"Enhancement",  desc:"Speech restoration (VoiceFixer)"     },
+  { id:"p09", name:"P09 · ClearerVoice",     cat:"Enhancement",  desc:"ClearerVoice-Studio (ModelScope)"    },
 ];
 
 /* PA Attack — real room recordings only (simulated RIRs excluded) */
@@ -202,16 +190,14 @@ const PA_ATTACKS = [
 
 function card(spkId, item, tcls) {
   const src = `samples/${spkId}/${item.id}.mp3`;
-  const ua  = !item.hasAudio;
-  return `<div class="sample-card${ua ? ' unavailable' : ''}">
+  return `<div class="sample-card">
     <div class="sample-top">
       <span class="sample-type ${tcls}">${item.id.toUpperCase()}</span>
       <span class="sample-name">${item.name}</span>
     </div>
     <div class="sample-cat">${item.cat}</div>
     <div class="sample-desc">${item.desc}</div>
-    ${ua ? '<div class="unavail-tag">sample not yet available</div>'
-         : `<audio controls preload="none"><source src="${src}" type="audio/mpeg"/></audio>`}
+    <audio controls preload="none"><source src="${src}" type="audio/mpeg"/></audio>
   </div>`;
 }
 
@@ -220,12 +206,8 @@ const main = document.querySelector("main");
 for (const spk of SPEAKERS) {
   const rng = mkRng(spk.seed);
 
-  /* Shuffle LA; audio-available first, pick 3 random ones to show upfront */
-  const laShuffled    = shuffle(LA_ATTACKS, rng);
-  const laWithAudio   = laShuffled.filter(a => a.hasAudio);
-  const laWithoutAudio = laShuffled.filter(a => !a.hasAudio);
-  const laOrdered     = [...laWithAudio, ...laWithoutAudio];
-  const laInitCount   = Math.min(3, laWithAudio.length);
+  /* Shuffle LA attacks (all have audio now) */
+  const laOrdered = shuffle(LA_ATTACKS, rng);
 
   const block = document.createElement("div");
   block.className = "speaker-block";
@@ -247,77 +229,28 @@ for (const spk of SPEAKERS) {
   const bonaGrid = document.createElement("div");
   bonaGrid.className = "samples-grid";
   bonaGrid.innerHTML = card(spk.id,
-    { id:"a00", name:"Bonafide", cat:"Original", desc:"Authentic speaker recording", hasAudio:true }, "t-bona");
+    { id:"a00", name:"Bonafide", cat:"Original", desc:"Authentic speaker recording" }, "t-bona");
   block.appendChild(bonaGrid);
 
-  /* LA Attack A01–A25 */
+  /* LA Attack A01–A25 — all shown */
   const laLabel = document.createElement("div");
   laLabel.className = "section-label";
   laLabel.innerHTML = `<span class="sec-badge b-la">LA Attack</span>Logical Access — A01 to A25<span class="sec-count">25 attack types</span>`;
   block.appendChild(laLabel);
-
   const laGrid = document.createElement("div");
   laGrid.className = "samples-grid";
-  const laShow  = laOrdered.slice(0, laInitCount);
-  const laExtra = laOrdered.slice(laInitCount);
-  laShow.forEach(a => { laGrid.innerHTML += card(spk.id, a, "t-la"); });
-  laExtra.forEach(a => {
-    const tmp = document.createElement("div");
-    tmp.innerHTML = card(spk.id, a, "t-la");
-    const el = tmp.firstElementChild;
-    el.classList.add("la-extra");
-    el.style.display = "none";
-    laGrid.appendChild(el);
-  });
+  laOrdered.forEach(a => { laGrid.innerHTML += card(spk.id, a, "t-la"); });
   block.appendChild(laGrid);
 
-  const laToggle = document.createElement("div");
-  laToggle.className = "show-more";
-  const laBtn = document.createElement("button");
-  laBtn.textContent = `Show all A01–A25 (${laExtra.length} more)`;
-  let laOpen = false;
-  laBtn.onclick = () => {
-    laOpen = !laOpen;
-    laGrid.querySelectorAll(".la-extra").forEach(el => { el.style.display = laOpen ? "" : "none"; });
-    laBtn.textContent = laOpen ? "Show fewer" : `Show all A01–A25 (${laExtra.length} more)`;
-  };
-  laToggle.appendChild(laBtn);
-  block.appendChild(laToggle);
-
-  /* AI-Processed P01–P09 */
+  /* AI-Processed P01–P09 — all shown */
   const aiLabel = document.createElement("div");
   aiLabel.className = "section-label";
   aiLabel.innerHTML = `<span class="sec-badge b-ai">AI-Processed</span>Neural Codec &amp; Enhancement — P01 to P09<span class="sec-count">9 types</span>`;
   block.appendChild(aiLabel);
-
-  const aiOrdered = [...AI_PROCESSED.filter(a => a.hasAudio), ...AI_PROCESSED.filter(a => !a.hasAudio)];
-  const aiGrid    = document.createElement("div");
+  const aiGrid = document.createElement("div");
   aiGrid.className = "samples-grid";
-  const aiShow  = aiOrdered.slice(0, 3);
-  const aiExtra = aiOrdered.slice(3);
-  aiShow.forEach(a => { aiGrid.innerHTML += card(spk.id, a, "t-ai"); });
-  aiExtra.forEach(a => {
-    const tmp = document.createElement("div");
-    tmp.innerHTML = card(spk.id, a, "t-ai");
-    const el = tmp.firstElementChild;
-    el.classList.add("ai-extra");
-    el.style.display = "none";
-    aiGrid.appendChild(el);
-  });
+  AI_PROCESSED.forEach(a => { aiGrid.innerHTML += card(spk.id, a, "t-ai"); });
   block.appendChild(aiGrid);
-
-  const aiToggle = document.createElement("div");
-  aiToggle.className = "show-more";
-  const aiBtn = document.createElement("button");
-  aiBtn.textContent = `Show all P01–P09 (${aiExtra.length} more)`;
-  let aiOpen = false;
-  aiBtn.onclick = () => {
-    aiOpen = !aiOpen;
-    aiGrid.querySelectorAll(".ai-extra").forEach(el => { el.style.display = aiOpen ? "" : "none"; });
-    aiBtn.textContent = aiOpen ? "Show fewer" : `Show all P01–P09 (${aiExtra.length} more)`;
-  };
-  aiToggle.appendChild(aiBtn);
-  block.appendChild(aiToggle);
 
   /* PA Attack — real recordings */
   const paLabel = document.createElement("div");
