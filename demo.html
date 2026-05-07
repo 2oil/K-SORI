@@ -1,309 +1,392 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>K-SORI — Audio Demo</title>
 <style>
+  /* ── Palette (Korean traditional colors) ── */
   :root {
-    --navy:   #1a3358;
-    --red:    #b5351a;
-    --jade:   #1a7f6a;
-    --purple: #5e3280;
-    --amber:  #c07a1a;
-    --bg:     #f5f0e8;
-    --card:   #fffdf8;
-    --border: #ddd8cc;
-    --text:   #1a1610;
-    --muted:  #6b6256;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo",
-                 "Noto Sans KR", sans-serif;
-    background: var(--bg);
-    color: var(--text);
+    --navy:   #1b3a5c;   /* 남색  indigo-navy    */
+    --red:    #b5341c;   /* 주홍  vermilion      */
+    --jade:   #1a7a62;   /* 비취  jade           */
+    --purple: #5d2f82;   /* 자주  royal purple   */
+    --amber:  #b8721a;   /* 황토  amber-earth    */
+    --gold:   #c9a227;   /* 금색  gold           */
+    --hanji:  #f4ede0;   /* 한지  rice-paper     */
+    --cream:  #fdf8f0;   /* cream card           */
+    --border: #d8cfbe;
+    --ink:    #1c1610;   /* 먹    ink            */
+    --muted:  #6b5f4f;
   }
 
-  /* ── Header ─────────────────────────── */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo",
+                 "Noto Sans KR", Roboto, sans-serif;
+    background: var(--hanji);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ────────────────────────────────────────
+     HEADER
+  ──────────────────────────────────────── */
   header {
     background: var(--navy);
     color: white;
-    padding: 2.8rem 2rem 2.2rem;
     text-align: center;
+    padding: 3rem 2rem 2.4rem;
     position: relative;
     overflow: hidden;
   }
-  /* 단청(dancheong) inspired stripe at top */
+
+  /* Dancheong colour bar */
   header::before {
     content: "";
-    display: block;
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 6px;
+    position: absolute; top: 0; left: 0; right: 0; height: 5px;
     background: linear-gradient(90deg,
-      #b5351a 0%, #b5351a 16.6%,
-      #c07a1a 16.6%, #c07a1a 33.2%,
-      #1a7f6a 33.2%, #1a7f6a 49.8%,
-      #5e3280 49.8%, #5e3280 66.4%,
-      #1a3358 66.4%, #1a3358 83%,
-      #b5351a 83%, #b5351a 100%
+      var(--red)    0%   16.7%,
+      var(--amber)  16.7% 33.3%,
+      var(--jade)   33.3% 50%,
+      var(--purple) 50%   66.7%,
+      var(--gold)   66.7% 83.3%,
+      var(--red)    83.3% 100%
     );
   }
-  .header-kw {
-    font-size: .72rem; font-weight: 700; letter-spacing: .25em;
-    text-transform: uppercase; color: #a8c4e8; margin-bottom: .7rem;
+
+  /* Subtle lattice pattern inspired by 격자무늬 */
+  header::after {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
   }
+
+  .header-inner { position: relative; z-index: 1; }
+
+  .header-eyebrow {
+    font-size: .68rem; font-weight: 700; letter-spacing: .28em;
+    text-transform: uppercase; color: #7fb0d8; margin-bottom: .8rem;
+  }
+
   header h1 {
-    font-size: 2.6rem; font-weight: 800; letter-spacing: -.5px;
-    color: #f0ece4;
+    font-size: 3rem; font-weight: 900; letter-spacing: -.5px;
+    color: #f0e8d8;
+    text-shadow: 0 2px 12px rgba(0,0,0,.35);
   }
-  header .subtitle {
-    margin-top: .5rem; color: #8aafce; font-size: .95rem;
+
+  .header-subtitle {
+    margin-top: .55rem; color: #8ab4d0; font-size: .95rem; font-style: italic;
   }
+
   .header-links {
-    margin-top: 1.2rem;
-    display: flex; gap: .75rem; justify-content: center; flex-wrap: wrap;
+    margin-top: 1.4rem;
+    display: flex; gap: .7rem; justify-content: center; flex-wrap: wrap;
   }
   .header-links a {
-    color: #a8c4e8; text-decoration: none; font-size: .86rem;
-    border: 1px solid #2e4f7a; padding: .3rem .9rem; border-radius: 6px;
-    transition: background .15s, color .15s;
+    color: #a8ccec; text-decoration: none; font-size: .84rem;
+    border: 1px solid rgba(255,255,255,.18);
+    padding: .35rem 1rem; border-radius: 20px;
+    background: rgba(255,255,255,.06);
+    backdrop-filter: blur(4px);
+    transition: background .18s, color .18s, border-color .18s;
   }
-  .header-links a:hover { background: #2e4f7a; color: #f0ece4; }
+  .header-links a:hover {
+    background: rgba(255,255,255,.15);
+    color: #fff;
+    border-color: rgba(255,255,255,.35);
+  }
 
-  /* ── Legend ─────────────────────────── */
+  /* ────────────────────────────────────────
+     LEGEND
+  ──────────────────────────────────────── */
   .legend {
     display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center;
-    padding: .9rem 2rem;
-    background: #122540;
-    border-top: 1px solid #2e4f7a;
+    padding: .85rem 2rem;
+    background: #112438;
+    border-top: 1px solid rgba(255,255,255,.08);
   }
   .badge {
-    font-size: .7rem; font-weight: 700; padding: .2rem .75rem;
-    border-radius: 3px; color: white; letter-spacing: .04em;
+    font-size: .68rem; font-weight: 700; padding: .22rem .75rem;
+    border-radius: 20px; color: white; letter-spacing: .05em;
+    box-shadow: 0 1px 3px rgba(0,0,0,.25);
   }
   .b-bona   { background: var(--jade); }
   .b-la     { background: var(--red); }
   .b-ai     { background: var(--purple); }
   .b-pa     { background: var(--amber); }
 
-  /* ── Main ────────────────────────────── */
-  main { max-width: 1200px; margin: 2rem auto; padding: 0 1rem 5rem; }
+  /* ────────────────────────────────────────
+     MAIN
+  ──────────────────────────────────────── */
+  main { max-width: 1240px; margin: 2.5rem auto; padding: 0 1.2rem 6rem; }
 
-  /* Section heading (between speaker blocks) */
+  /* Section divider between speaker groups */
   .env-divider {
     display: flex; align-items: center; gap: 1rem;
-    margin: 2.5rem 0 1.2rem;
-    font-size: .72rem; font-weight: 800; letter-spacing: .15em;
+    margin: 3rem 0 1.4rem;
+    font-size: .7rem; font-weight: 800; letter-spacing: .2em;
     text-transform: uppercase; color: var(--muted);
   }
   .env-divider::before, .env-divider::after {
-    content: ""; flex: 1; height: 1px; background: var(--border);
+    content: ""; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
   }
+  .env-divider:first-child { margin-top: 0; }
 
-  /* ── Speaker block ───────────────────── */
+  /* ────────────────────────────────────────
+     SPEAKER BLOCK
+  ──────────────────────────────────────── */
   .speaker-block {
-    background: var(--card);
+    background: var(--cream);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    margin-bottom: 1.8rem;
-    box-shadow: 0 2px 8px rgba(26,19,10,.07);
+    border-radius: 16px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 16px rgba(26,19,10,.08), 0 1px 3px rgba(26,19,10,.04);
     overflow: hidden;
   }
+
   .speaker-header {
-    background: linear-gradient(135deg, #1a3358 0%, #234776 100%);
-    padding: .9rem 1.4rem;
-    display: flex; align-items: center; gap: .9rem; color: white;
+    background: linear-gradient(135deg, #1b3a5c 0%, #243e5e 60%, #1e4970 100%);
+    padding: 1rem 1.6rem;
+    display: flex; align-items: center; gap: 1rem; color: white;
+    position: relative;
   }
-  .spk-avatar {
-    width: 40px; height: 40px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.1rem;
-    background: rgba(255,255,255,.12);
-    border: 1px solid rgba(255,255,255,.2);
-    flex-shrink: 0;
-  }
-  .speaker-id   { font-size: 1rem; font-weight: 700; }
-  .speaker-meta { font-size: .78rem; color: #90b8d8; margin-top: .1rem; }
-  .spk-env {
-    margin-left: auto; font-size: .7rem;
-    background: rgba(255,255,255,.1);
-    padding: .18rem .6rem; border-radius: 3px;
-    color: #c0d8ee; white-space: nowrap; letter-spacing: .03em;
+  /* Decorative right corner accent (기하학 패턴) */
+  .speaker-header::after {
+    content: "";
+    position: absolute; right: 0; top: 0; bottom: 0; width: 80px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.03));
+    pointer-events: none;
   }
 
-  /* ── Section label ───────────────────── */
+  .spk-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; flex-shrink: 0;
+    background: rgba(255,255,255,.1);
+    border: 1.5px solid rgba(255,255,255,.22);
+    box-shadow: 0 2px 8px rgba(0,0,0,.2);
+  }
+  .spk-info { flex: 1; min-width: 0; }
+  .spk-label { font-size: 1rem; font-weight: 700; color: #f0e8d8; }
+  .spk-meta  { font-size: .76rem; color: #90b8d8; margin-top: .12rem; }
+  .spk-tag {
+    font-size: .66rem; font-weight: 600; letter-spacing: .06em;
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.2);
+    padding: .2rem .65rem; border-radius: 12px;
+    color: #c0d8ee; white-space: nowrap;
+  }
+
+  /* ────────────────────────────────────────
+     SECTION LABEL
+  ──────────────────────────────────────── */
   .section-label {
-    font-size: .66rem; font-weight: 800; text-transform: uppercase;
-    letter-spacing: .12em; color: var(--muted);
-    padding: .9rem 1.4rem .35rem;
+    font-size: .65rem; font-weight: 800; text-transform: uppercase;
+    letter-spacing: .13em; color: var(--muted);
+    padding: .85rem 1.6rem .3rem;
     border-top: 1px solid var(--border);
     display: flex; align-items: center; gap: .55rem; flex-wrap: wrap;
   }
   .section-label:first-of-type { border-top: none; }
+
   .sec-badge {
-    font-size: .62rem; padding: .12rem .5rem; border-radius: 3px;
-    color: white; font-weight: 700; flex-shrink: 0; letter-spacing: .04em;
+    font-size: .6rem; padding: .13rem .5rem; border-radius: 12px;
+    color: white; font-weight: 700; flex-shrink: 0; letter-spacing: .05em;
   }
   .sec-count {
-    margin-left: auto; font-size: .62rem; color: var(--muted);
-    background: var(--bg); border: 1px solid var(--border);
-    padding: .08rem .45rem; border-radius: 3px;
+    margin-left: auto; font-size: .6rem; color: var(--muted);
+    background: var(--hanji); border: 1px solid var(--border);
+    padding: .1rem .45rem; border-radius: 10px;
   }
 
-  /* ── Sample grid ─────────────────────── */
+  /* ────────────────────────────────────────
+     SAMPLE GRID
+  ──────────────────────────────────────── */
   .samples-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
-    gap: .55rem;
-    padding: .4rem 1.4rem 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: .6rem;
+    padding: .45rem 1.6rem 1.1rem;
   }
 
-  /* ── Sample card ─────────────────────── */
+  /* ────────────────────────────────────────
+     SAMPLE CARD
+  ──────────────────────────────────────── */
   .sample-card {
     border: 1px solid var(--border);
-    border-radius: 8px; padding: .65rem;
-    background: #fdfaf4;
-    transition: box-shadow .15s, border-color .15s;
+    border-radius: 10px; padding: .7rem;
+    background: #fefcf7;
+    transition: box-shadow .18s, transform .18s, border-color .18s;
+    position: relative;
   }
   .sample-card:hover {
-    box-shadow: 0 3px 10px rgba(26,19,10,.1);
-    border-color: #c8c0b0;
+    box-shadow: 0 6px 20px rgba(26,19,10,.11);
+    transform: translateY(-1px);
+    border-color: #b8ad9c;
   }
-  .sample-top  { display: flex; align-items: center; gap: .4rem; margin-bottom: .25rem; }
+
+  /* Coloured left border accent */
+  .sample-card::before {
+    content: "";
+    position: absolute; left: 0; top: 8px; bottom: 8px; width: 3px;
+    border-radius: 0 2px 2px 0;
+  }
+  .sample-card.c-bona::before   { background: var(--jade); }
+  .sample-card.c-la::before     { background: var(--red); }
+  .sample-card.c-ai::before     { background: var(--purple); }
+  .sample-card.c-pa::before     { background: var(--amber); }
+
+  .sample-top {
+    display: flex; align-items: center; gap: .38rem;
+    margin-bottom: .22rem; padding-left: .28rem;
+  }
   .sample-type {
-    font-size: .63rem; font-weight: 700; padding: .1rem .38rem;
-    border-radius: 3px; color: white; white-space: nowrap; flex-shrink: 0;
+    font-size: .6rem; font-weight: 800; padding: .1rem .38rem;
+    border-radius: 10px; color: white; white-space: nowrap; flex-shrink: 0;
+    letter-spacing: .03em;
   }
   .t-bona   { background: var(--jade); }
   .t-la     { background: var(--red); }
   .t-ai     { background: var(--purple); }
   .t-pa     { background: var(--amber); }
-  .sample-name { font-size: .78rem; font-weight: 600; color: var(--text); }
-  .sample-cat  { font-size: .63rem; color: var(--muted); font-style: italic; margin-bottom: .22rem; }
-  .sample-desc { font-size: .67rem; color: var(--muted); margin-bottom: .38rem; line-height: 1.4; }
-  audio { width: 100%; height: 28px; display: block; }
 
-  /* ── PA block (global) ───────────────── */
-  .pa-block {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-top: 3px solid var(--amber);
-    border-radius: 12px;
-    margin-bottom: 1.8rem;
-    box-shadow: 0 2px 8px rgba(26,19,10,.07);
-    overflow: hidden;
+  .sample-name {
+    font-size: .78rem; font-weight: 600; color: var(--ink);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
-  .pa-header {
-    background: linear-gradient(135deg, #3d2800 0%, #5a3a00 100%);
-    padding: .9rem 1.4rem;
-    display: flex; align-items: center; gap: .8rem; color: white;
+  .sample-cat  {
+    font-size: .62rem; color: var(--muted); font-style: italic;
+    margin: .1rem 0 .18rem .28rem;
   }
-  .pa-title  { font-size: 1rem; font-weight: 700; }
-  .pa-subtitle { font-size: .78rem; color: #d4b87a; margin-top: .1rem; }
-  .pa-grid {
+  .sample-desc {
+    font-size: .66rem; color: var(--muted);
+    margin-bottom: .38rem; line-height: 1.45; padding-left: .28rem;
+  }
+  audio {
+    width: 100%; height: 28px; display: block;
+    border-radius: 6px; overflow: hidden;
+  }
+
+  /* ────────────────────────────────────────
+     PA GRID (inside speaker block, 3 col)
+  ──────────────────────────────────────── */
+  .pa-sub-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
-    gap: .55rem;
-    padding: 1rem 1.4rem 1.2rem;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: .6rem;
+    padding: .45rem 1.6rem 1.1rem;
+  }
+  .pa-sub-label {
+    font-size: .58rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .1em; color: var(--amber);
+    margin-bottom: .12rem; padding-left: .28rem;
   }
 
-  /* ── Footer ─────────────────────────── */
+  /* ────────────────────────────────────────
+     FOOTER
+  ──────────────────────────────────────── */
   footer {
     text-align: center; color: var(--muted); font-size: .8rem;
-    padding: 2rem; border-top: 1px solid var(--border);
+    padding: 2.5rem 1rem;
+    border-top: 1px solid var(--border);
+    background: linear-gradient(to bottom, transparent, rgba(180,160,130,.06));
   }
-  footer a { color: #2e6aad; }
-  .footer-divider {
-    display: inline-block; width: 4px; height: 4px;
-    background: var(--border); border-radius: 50%; margin: 0 .5rem;
-    vertical-align: middle;
-  }
+  footer a { color: var(--navy); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  .dot { display: inline-block; width: 3px; height: 3px;
+         background: var(--border); border-radius: 50%;
+         margin: 0 .6rem; vertical-align: middle; }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="header-kw">Audio Demo</div>
+<div class="header-inner">
+  <div class="header-eyebrow">Audio Demo</div>
   <h1>K-SORI</h1>
-  <div class="subtitle">Korean Speech Dataset for Overall Robustness in SASV</div>
+  <div class="header-subtitle">Korean Speech Dataset for Overall Robustness in SASV</div>
   <div class="header-links">
     <a href="https://huggingface.co/datasets/eoil/K-SORI">🤗 HuggingFace Dataset</a>
     <a href="https://github.com/2oil/K-SORI">GitHub</a>
   </div>
+</div>
 </header>
 
 <div class="legend">
   <span class="badge b-bona">Bonafide</span>
-  <span class="badge b-la">LA Attack &nbsp;A01–A25</span>
-  <span class="badge b-ai">AI-Processed &nbsp;P01–P09</span>
+  <span class="badge b-la">LA Attack · A01–A25</span>
+  <span class="badge b-ai">AI-Processed · P01–P09</span>
   <span class="badge b-pa">PA Attack</span>
 </div>
 
 <main>
 <script>
 const SPEAKERS = [
-  { id:"9038",     gender:"M", env:"Studio",      label:"Studio_M",   env_ko:"스튜디오 녹음" },
-  { id:"10",       gender:"F", env:"Studio",      label:"Studio_F",   env_ko:"스튜디오 녹음" },
-  { id:"ITW_00001",gender:"M", env:"In-the-Wild", label:"ITW_M",      env_ko:"자연 환경 녹음" },
-  { id:"ITW_00002",gender:"F", env:"In-the-Wild", label:"ITW_F",      env_ko:"자연 환경 녹음" },
+  { id:"9038",      gender:"M", env:"Studio",       label:"Studio_M", desc:"Studio Recording" },
+  { id:"10",        gender:"F", env:"Studio",       label:"Studio_F", desc:"Studio Recording" },
+  { id:"ITW_00001", gender:"M", env:"In-the-Wild",  label:"ITW_M",    desc:"In-the-Wild Recording" },
+  { id:"ITW_00002", gender:"F", env:"In-the-Wild",  label:"ITW_F",    desc:"In-the-Wild Recording" },
 ];
 
-/* LA A01–A25 in fixed order */
 const LA_ATTACKS = [
-  { id:"a01", name:"A01 · Zonos TTS",          cat:"Zero-shot TTS",    desc:"Zonos-v0.1-hybrid"                             },
-  { id:"a02", name:"A02 · GPT-SoVITS",         cat:"Zero-shot TTS",    desc:"GPT-SoVITS"                                    },
-  { id:"a03", name:"A03 · Coqui TTS",           cat:"Zero-shot TTS",    desc:"Coqui-ai TTS"                                  },
-  { id:"a04", name:"A04 · Zonos (transformer)", cat:"Zero-shot TTS",    desc:"Zonos-v0.1-transformer"                        },
-  { id:"a05", name:"A05 · ElevenLabs TTS",      cat:"Commercial TTS",   desc:"ElevenLabs multilingual v2"                    },
-  { id:"a06", name:"A06 · Coqui VC",            cat:"Zero-shot VC",     desc:"Coqui-ai TTS (voice conversion mode)"          },
-  { id:"a07", name:"A07 · seed-vc",             cat:"Zero-shot VC",     desc:"seed-vc"                                       },
-  { id:"a08", name:"A08 · ElevenLabs VC",       cat:"Commercial VC",    desc:"ElevenLabs multilingual v2 (VC mode)"          },
-  { id:"a09", name:"A09 · Partially Fake",      cat:"Partial Fake",     desc:"Partial speech manipulation"                   },
-  { id:"a10", name:"A10 · VoiceCraft",          cat:"Speech Editing",   desc:"VoiceCraft"                                    },
-  { id:"a11", name:"A11 · VITS",                cat:"Fully-trained TTS",desc:"VITS (fine-tuned)"                             },
-  { id:"a12", name:"A12 · MeloTTS",             cat:"Fully-trained TTS",desc:"MeloTTS"                                       },
-  { id:"a13", name:"A13 · OpenVoice",           cat:"Zero-shot TTS",    desc:"OpenVoice"                                     },
-  { id:"a14", name:"A14 · CosyVoice",           cat:"Zero-shot TTS",    desc:"CosyVoice"                                     },
-  { id:"a15", name:"A15 · Kits.ai",             cat:"Commercial VC",    desc:"Kits.ai voice conversion"                      },
-  { id:"a16", name:"A16 · VALL-E (Korean)",     cat:"Zero-shot TTS",    desc:"VALL-E Korean"                                 },
-  { id:"a17", name:"A17 · Chatterbox TTS",      cat:"Zero-shot TTS",    desc:"Chatterbox (Resemble AI)"                      },
-  { id:"a18", name:"A18 · SSR-Speech",          cat:"Speech Editing",   desc:"SSR-Speech"                                    },
-  { id:"a19", name:"A19 · PartialEdit",         cat:"Speech Editing",   desc:"PartialEdit (SpeechBrain)"                     },
-  { id:"a20", name:"A20 · IMS-Toucan",          cat:"Zero-shot TTS",    desc:"IMS-Toucan"                                    },
-  { id:"a21", name:"A21 · FAKEBOB",             cat:"Adversarial",      desc:"Adversarial attack (ASV target)"               },
-  { id:"a22", name:"A22 · Double-deceiver",     cat:"Adversarial",      desc:"Adversarial attack (SASV target)"              },
-  { id:"a23", name:"A23 · A08+A22",             cat:"Adversarial",      desc:"ElevenLabs VC + Double-deceiver (SASV target)" },
-  { id:"a24", name:"A24 · A05+Malafide",        cat:"Adversarial",      desc:"ElevenLabs TTS + Malafide (CM target)"         },
-  { id:"a25", name:"A25 · Chatterbox VC",       cat:"Zero-shot VC",     desc:"Chatterbox (Resemble AI, VC mode)"             },
+  { id:"a01", name:"A01 · Zonos TTS",           cat:"Zero-shot TTS",     desc:"Zonos-v0.1-hybrid"                              },
+  { id:"a02", name:"A02 · GPT-SoVITS",          cat:"Zero-shot TTS",     desc:"GPT-SoVITS"                                     },
+  { id:"a03", name:"A03 · Coqui TTS",            cat:"Zero-shot TTS",     desc:"Coqui-ai TTS"                                   },
+  { id:"a04", name:"A04 · Zonos (transformer)",  cat:"Zero-shot TTS",     desc:"Zonos-v0.1-transformer"                         },
+  { id:"a05", name:"A05 · ElevenLabs TTS",       cat:"Commercial TTS",    desc:"ElevenLabs multilingual v2"                     },
+  { id:"a06", name:"A06 · Coqui VC",             cat:"Zero-shot VC",      desc:"Coqui-ai TTS (voice conversion mode)"           },
+  { id:"a07", name:"A07 · seed-vc",              cat:"Zero-shot VC",      desc:"seed-vc"                                        },
+  { id:"a08", name:"A08 · ElevenLabs VC",        cat:"Commercial VC",     desc:"ElevenLabs multilingual v2 (VC mode)"           },
+  { id:"a09", name:"A09 · Partially Fake",       cat:"Partial Fake",      desc:"Partial speech manipulation"                    },
+  { id:"a10", name:"A10 · VoiceCraft",           cat:"Speech Editing",    desc:"VoiceCraft"                                     },
+  { id:"a11", name:"A11 · VITS",                 cat:"Fully-trained TTS", desc:"VITS (fine-tuned)"                              },
+  { id:"a12", name:"A12 · MeloTTS",              cat:"Fully-trained TTS", desc:"MeloTTS"                                        },
+  { id:"a13", name:"A13 · OpenVoice",            cat:"Zero-shot TTS",     desc:"OpenVoice"                                      },
+  { id:"a14", name:"A14 · CosyVoice",            cat:"Zero-shot TTS",     desc:"CosyVoice"                                      },
+  { id:"a15", name:"A15 · Kits.ai",              cat:"Commercial VC",     desc:"Kits.ai voice conversion"                       },
+  { id:"a16", name:"A16 · VALL-E (Korean)",      cat:"Zero-shot TTS",     desc:"VALL-E Korean"                                  },
+  { id:"a17", name:"A17 · Chatterbox TTS",       cat:"Zero-shot TTS",     desc:"Chatterbox (Resemble AI)"                       },
+  { id:"a18", name:"A18 · SSR-Speech",           cat:"Speech Editing",    desc:"SSR-Speech"                                     },
+  { id:"a19", name:"A19 · PartialEdit",          cat:"Speech Editing",    desc:"PartialEdit (SpeechBrain)"                      },
+  { id:"a20", name:"A20 · IMS-Toucan",           cat:"Zero-shot TTS",     desc:"IMS-Toucan"                                     },
+  { id:"a21", name:"A21 · FAKEBOB",              cat:"Adversarial",       desc:"Adversarial attack (ASV target)"                },
+  { id:"a22", name:"A22 · Double-deceiver",      cat:"Adversarial",       desc:"Adversarial attack (SASV target)"               },
+  { id:"a23", name:"A23 · A08 + A22",            cat:"Adversarial",       desc:"ElevenLabs VC + Double-deceiver (SASV target)"  },
+  { id:"a24", name:"A24 · A05 + Malafide",       cat:"Adversarial",       desc:"ElevenLabs TTS + Malafide (CM target)"          },
+  { id:"a25", name:"A25 · Chatterbox VC",        cat:"Zero-shot VC",      desc:"Chatterbox (Resemble AI, VC mode)"              },
 ];
 
 const AI_PROCESSED = [
-  { id:"p01", name:"P01 · BigCodec",         cat:"Neural Codec", desc:"BigCodec neural speech codec"      },
-  { id:"p02", name:"P02 · EnCodec",          cat:"Neural Codec", desc:"EnCodec (Meta)"                    },
-  { id:"p03", name:"P03 · SpeechTokenizer",  cat:"Neural Codec", desc:"SpeechTokenizer"                   },
-  { id:"p04", name:"P04 · FunCodec",         cat:"Neural Codec", desc:"FunCodec (Alibaba DAMO)"           },
-  { id:"p05", name:"P05 · AcademiCodec",     cat:"Neural Codec", desc:"AcademiCodec"                      },
-  { id:"p06", name:"P06 · Demucs",           cat:"Enhancement",  desc:"Speech enhancement (Meta Demucs)"  },
-  { id:"p07", name:"P07 · resemble-enhance", cat:"Enhancement",  desc:"Speech enhancement (Resemble AI)"  },
-  { id:"p08", name:"P08 · VoiceFixer",       cat:"Enhancement",  desc:"Speech restoration (VoiceFixer)"   },
-  { id:"p09", name:"P09 · ClearerVoice",     cat:"Enhancement",  desc:"ClearerVoice-Studio (ModelScope)"  },
+  { id:"p01", name:"P01 · BigCodec",          cat:"Neural Codec",  desc:"BigCodec neural speech codec"       },
+  { id:"p02", name:"P02 · EnCodec",           cat:"Neural Codec",  desc:"EnCodec (Meta)"                     },
+  { id:"p03", name:"P03 · SpeechTokenizer",   cat:"Neural Codec",  desc:"SpeechTokenizer"                    },
+  { id:"p04", name:"P04 · FunCodec",          cat:"Neural Codec",  desc:"FunCodec (Alibaba DAMO)"            },
+  { id:"p05", name:"P05 · AcademiCodec",      cat:"Neural Codec",  desc:"AcademiCodec"                       },
+  { id:"p06", name:"P06 · Demucs",            cat:"Enhancement",   desc:"Speech enhancement (Meta Demucs)"   },
+  { id:"p07", name:"P07 · resemble-enhance",  cat:"Enhancement",   desc:"Speech enhancement (Resemble AI)"   },
+  { id:"p08", name:"P08 · VoiceFixer",        cat:"Enhancement",   desc:"Speech restoration (VoiceFixer)"    },
+  { id:"p09", name:"P09 · ClearerVoice",      cat:"Enhancement",   desc:"ClearerVoice-Studio (ModelScope)"   },
 ];
 
-/* PA: 6 real room/device settings */
 const PA_ATTACKS = [
-  { id:"pa_r1_blue",    name:"BLUE Mic · Room 1",    cat:"Condenser Mic",   desc:"LG gram speaker, Room 1 (6.0×7.2×2.7 m)"  },
-  { id:"pa_r1_brio",    name:"Logitech BRIO · Room 1",cat:"Webcam Mic",     desc:"LG gram speaker, Room 1"                   },
-  { id:"pa_r1_iriver",  name:"IRIVER · Room 1",       cat:"Headphone Mic",  desc:"LG gram speaker, Room 1"                   },
-  { id:"pa_r2_blue",    name:"BLUE Mic · Room 2",     cat:"Condenser Mic",  desc:"Sony BT speaker, Room 2 (6.3×6.5×2.7 m)"  },
-  { id:"pa_r2_croad",   name:"Waycos Croad · Room 2", cat:"USB Mic",        desc:"Sony BT speaker, Room 2"                   },
-  { id:"pa_r2_samsung", name:"Samsung Galaxy · Room 2",cat:"Laptop Mic",    desc:"Sony BT speaker, Room 2"                   },
+  { id:"pa_r1_blue",    name:"BLUE Mic",         room:"Room 1", device:"LG gram (laptop)",    desc:"Condenser mic · LG gram speaker"  },
+  { id:"pa_r1_brio",    name:"Logitech BRIO",    room:"Room 1", device:"LG gram (laptop)",    desc:"Webcam mic · LG gram speaker"     },
+  { id:"pa_r1_iriver",  name:"IRIVER",           room:"Room 1", device:"LG gram (laptop)",    desc:"Headphone mic · LG gram speaker"  },
+  { id:"pa_r2_blue",    name:"BLUE Mic",         room:"Room 2", device:"Sony BT Speaker",     desc:"Condenser mic · Sony BT speaker"  },
+  { id:"pa_r2_croad",   name:"Waycos Croad",     room:"Room 2", device:"Sony BT Speaker",     desc:"USB mic · Sony BT speaker"        },
+  { id:"pa_r2_samsung", name:"Samsung Galaxy",   room:"Room 2", device:"Sony BT Speaker",     desc:"Laptop mic · Sony BT speaker"     },
 ];
 
-function card(spkId, item, tcls) {
+function card(spkId, item, tcls, cls) {
   const src = `samples/${spkId}/${item.id}.mp3`;
-  return `<div class="sample-card">
+  return `<div class="sample-card ${cls}">
     <div class="sample-top">
       <span class="sample-type ${tcls}">${item.id.toUpperCase()}</span>
       <span class="sample-name">${item.name}</span>
@@ -314,28 +397,28 @@ function card(spkId, item, tcls) {
   </div>`;
 }
 
-function paCard(item) {
-  const src = `samples/pa/${item.id}.mp3`;
-  return `<div class="sample-card">
+function paCard(spkId, item) {
+  const src = `samples/${spkId}/${item.id}.mp3`;
+  return `<div class="sample-card c-pa">
+    <div class="pa-sub-label">${item.room}</div>
     <div class="sample-top">
-      <span class="sample-type t-pa">${item.id.replace('pa_','').toUpperCase()}</span>
+      <span class="sample-type t-pa">${item.room.replace(' ','').toLowerCase()}</span>
       <span class="sample-name">${item.name}</span>
     </div>
-    <div class="sample-cat">${item.cat}</div>
+    <div class="sample-cat">${item.device}</div>
     <div class="sample-desc">${item.desc}</div>
     <audio controls preload="none"><source src="${src}" type="audio/mpeg"/></audio>
   </div>`;
 }
 
 const main = document.querySelector("main");
-
 let lastEnv = null;
+
 for (const spk of SPEAKERS) {
-  /* Environment divider */
   if (spk.env !== lastEnv) {
     const div = document.createElement("div");
     div.className = "env-divider";
-    div.textContent = spk.env === "Studio" ? "Studio Recording" : "In-the-Wild Recording";
+    div.textContent = spk.env === "Studio" ? "Studio Speakers" : "In-the-Wild Speakers";
     main.appendChild(div);
     lastEnv = spk.env;
   }
@@ -345,75 +428,63 @@ for (const spk of SPEAKERS) {
   block.innerHTML = `
     <div class="speaker-header">
       <div class="spk-avatar">${spk.gender === "F" ? "♀" : "♂"}</div>
-      <div>
-        <div class="speaker-id">${spk.label}</div>
-        <div class="speaker-meta">${spk.gender === "F" ? "Female" : "Male"} · ${spk.id}</div>
+      <div class="spk-info">
+        <div class="spk-label">${spk.label}</div>
+        <div class="spk-meta">${spk.gender === "F" ? "Female" : "Male"} &nbsp;·&nbsp; ID: ${spk.id}</div>
       </div>
-      <span class="spk-env">${spk.env_ko}</span>
+      <span class="spk-tag">${spk.desc}</span>
     </div>`;
 
   /* Bonafide */
-  const bonaLabel = document.createElement("div");
-  bonaLabel.className = "section-label";
-  bonaLabel.innerHTML = `<span class="sec-badge b-bona">Bonafide</span>원본 화자 발화`;
-  block.appendChild(bonaLabel);
-  const bonaGrid = document.createElement("div");
-  bonaGrid.className = "samples-grid";
-  bonaGrid.innerHTML = card(spk.id,
-    { id:"a00", name:"Bonafide", cat:"Original", desc:"Authentic speaker recording" }, "t-bona");
-  block.appendChild(bonaGrid);
+  const lb0 = document.createElement("div");
+  lb0.className = "section-label";
+  lb0.innerHTML = `<span class="sec-badge b-bona">Bonafide</span>Original Speaker Recording`;
+  block.appendChild(lb0);
+  const g0 = document.createElement("div");
+  g0.className = "samples-grid";
+  g0.innerHTML = card(spk.id, { id:"a00", name:"Bonafide", cat:"Original", desc:"Authentic speaker recording" }, "t-bona", "c-bona");
+  block.appendChild(g0);
 
-  /* LA Attack A01–A25 */
-  const laLabel = document.createElement("div");
-  laLabel.className = "section-label";
-  laLabel.innerHTML = `<span class="sec-badge b-la">LA Attack</span>Logical Access — A01 to A25<span class="sec-count">25 types</span>`;
-  block.appendChild(laLabel);
-  const laGrid = document.createElement("div");
-  laGrid.className = "samples-grid";
-  LA_ATTACKS.forEach(a => { laGrid.innerHTML += card(spk.id, a, "t-la"); });
-  block.appendChild(laGrid);
+  /* LA Attack */
+  const lb1 = document.createElement("div");
+  lb1.className = "section-label";
+  lb1.innerHTML = `<span class="sec-badge b-la">LA Attack</span>Logical Access — A01 to A25<span class="sec-count">25 attack types</span>`;
+  block.appendChild(lb1);
+  const g1 = document.createElement("div");
+  g1.className = "samples-grid";
+  LA_ATTACKS.forEach(a => { g1.innerHTML += card(spk.id, a, "t-la", "c-la"); });
+  block.appendChild(g1);
 
-  /* AI-Processed P01–P09 */
-  const aiLabel = document.createElement("div");
-  aiLabel.className = "section-label";
-  aiLabel.innerHTML = `<span class="sec-badge b-ai">AI-Processed</span>Neural Codec &amp; Enhancement — P01 to P09<span class="sec-count">9 types</span>`;
-  block.appendChild(aiLabel);
-  const aiGrid = document.createElement("div");
-  aiGrid.className = "samples-grid";
-  AI_PROCESSED.forEach(a => { aiGrid.innerHTML += card(spk.id, a, "t-ai"); });
-  block.appendChild(aiGrid);
+  /* AI-Processed */
+  const lb2 = document.createElement("div");
+  lb2.className = "section-label";
+  lb2.innerHTML = `<span class="sec-badge b-ai">AI-Processed</span>Neural Codec &amp; Enhancement — P01 to P09<span class="sec-count">9 types</span>`;
+  block.appendChild(lb2);
+  const g2 = document.createElement("div");
+  g2.className = "samples-grid";
+  AI_PROCESSED.forEach(a => { g2.innerHTML += card(spk.id, a, "t-ai", "c-ai"); });
+  block.appendChild(g2);
+
+  /* PA Attack — per speaker, 6 settings */
+  const lb3 = document.createElement("div");
+  lb3.className = "section-label";
+  lb3.innerHTML = `<span class="sec-badge b-pa">PA Attack</span>Replay Attack — 6 Room / Device Settings<span class="sec-count">real recordings only</span>`;
+  block.appendChild(lb3);
+  const g3 = document.createElement("div");
+  g3.className = "pa-sub-grid";
+  PA_ATTACKS.forEach(a => { g3.innerHTML += paCard(spk.id, a); });
+  block.appendChild(g3);
 
   main.appendChild(block);
 }
-
-/* PA Attack — one global block */
-const paDivider = document.createElement("div");
-paDivider.className = "env-divider";
-paDivider.textContent = "Physical Access — Replay Attack";
-main.appendChild(paDivider);
-
-const paBlock = document.createElement("div");
-paBlock.className = "pa-block";
-paBlock.innerHTML = `
-  <div class="pa-header">
-    <div>
-      <div class="pa-title">PA Attack</div>
-      <div class="pa-subtitle">6 room/device settings · real room recordings only</div>
-    </div>
-  </div>`;
-const paGrid = document.createElement("div");
-paGrid.className = "pa-grid";
-PA_ATTACKS.forEach(a => { paGrid.innerHTML += paCard(a); });
-paBlock.appendChild(paGrid);
-main.appendChild(paBlock);
 </script>
 </main>
 
 <footer>
-  K-SORI — NeurIPS 2026 Submission
-  <span class="footer-divider"></span>
+  K-SORI &mdash; NeurIPS 2026 Submission
+  <span class="dot"></span>
   <a href="https://huggingface.co/datasets/eoil/K-SORI">🤗 Dataset on HuggingFace</a>
-  <span class="footer-divider"></span>
+  <span class="dot"></span>
   <a href="https://github.com/2oil/K-SORI">GitHub</a>
 </footer>
 </body>
