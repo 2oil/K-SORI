@@ -324,7 +324,6 @@
   <span class="badge b-bona">Bonafide</span>
   <span class="badge b-la">LA Attack · A01–A25</span>
   <span class="badge b-ai">AI-Processed · P01–P09</span>
-  <span class="badge b-pa">PA Attack</span>
 </div>
 
 <main>
@@ -466,11 +465,6 @@ for (const spk of SPEAKERS) {
   AI_PROCESSED.forEach(a => { g2.innerHTML += card(spk.id, a, "t-ai", "c-ai"); });
   block.appendChild(g2);
 
-  /* PA Attack — section label only, no audio cards shown */
-  const lb3 = document.createElement("div");
-  lb3.className = "section-label";
-  lb3.innerHTML = `<span class="sec-badge b-pa">PA Attack</span>Replay Attack — 6 Room / Device Settings<span class="sec-count">diverse room &amp; mic conditions</span>`;
-  block.appendChild(lb3);
 
   main.appendChild(block);
 }
