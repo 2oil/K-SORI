@@ -323,39 +323,40 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="72" height="48" viewBox="0 0 90 60">
   <!-- White field -->
   <rect width="90" height="60" fill="white" rx="4"/>
-  <!-- Taegeuk circle -->
-  <circle cx="45" cy="30" r="14" fill="#cd2e3a"/>
-  <!-- Blue half (yin) -->
-  <path d="M45,16 A14,14 0 0,0 45,44 A7,7 0 0,0 45,30 A7,7 0 0,1 45,16Z" fill="#003478"/>
-  <!-- ☰ Geon (top-left) — 3 solid bars -->
-  <g fill="#1a1a2e">
-    <rect x="10" y="10" width="18" height="3" rx="1.2"/>
-    <rect x="10" y="15" width="18" height="3" rx="1.2"/>
-    <rect x="10" y="20" width="18" height="3" rx="1.2"/>
+  <!-- Taegeuk: full red (yang) circle -->
+  <circle cx="45" cy="30" r="15" fill="#cd2e3a"/>
+  <!-- Blue (yin): CCW large arc → CW lower small arc → CCW upper small arc -->
+  <path d="M45,15 A15,15 0 0,0 45,45 A7.5,7.5 0 0,1 45,30 A7.5,7.5 0 0,0 45,15Z" fill="#003478"/>
+  <!-- Trigrams: each centered at its position, bars rotated perpendicular to the diagonal -->
+  <!-- ☰ Geon (top-left) — 3 solid bars — rotate -56.3° -->
+  <g transform="translate(13,10) rotate(-56.31)" fill="#1a1a2e">
+    <rect x="-8.5" y="-6.75" width="17" height="2.5"/>
+    <rect x="-8.5" y="-1.25" width="17" height="2.5"/>
+    <rect x="-8.5" y="4.25"  width="17" height="2.5"/>
   </g>
-  <!-- ☷ Gon (bottom-right) — 3 broken bars -->
-  <g fill="#1a1a2e">
-    <rect x="62" y="37" width="8" height="3" rx="1.2"/>
-    <rect x="72" y="37" width="8" height="3" rx="1.2"/>
-    <rect x="62" y="42" width="8" height="3" rx="1.2"/>
-    <rect x="72" y="42" width="8" height="3" rx="1.2"/>
-    <rect x="62" y="47" width="8" height="3" rx="1.2"/>
-    <rect x="72" y="47" width="8" height="3" rx="1.2"/>
+  <!-- ☵ Gam (top-right) — broken/solid/broken — rotate +56.3° -->
+  <g transform="translate(77,10) rotate(56.31)" fill="#1a1a2e">
+    <rect x="-8.5" y="-6.75" width="6.5" height="2.5"/>
+    <rect x="2"    y="-6.75" width="6.5" height="2.5"/>
+    <rect x="-8.5" y="-1.25" width="17" height="2.5"/>
+    <rect x="-8.5" y="4.25"  width="6.5" height="2.5"/>
+    <rect x="2"    y="4.25"  width="6.5" height="2.5"/>
   </g>
-  <!-- ☵ Gam (top-right) — broken·solid·broken -->
-  <g fill="#1a1a2e">
-    <rect x="62" y="10" width="8" height="3" rx="1.2"/>
-    <rect x="72" y="10" width="8" height="3" rx="1.2"/>
-    <rect x="62" y="15" width="18" height="3" rx="1.2"/>
-    <rect x="62" y="20" width="8" height="3" rx="1.2"/>
-    <rect x="72" y="20" width="8" height="3" rx="1.2"/>
+  <!-- ☲ Li (bottom-left) — solid/broken/solid — rotate +56.3° -->
+  <g transform="translate(13,50) rotate(56.31)" fill="#1a1a2e">
+    <rect x="-8.5" y="-6.75" width="17" height="2.5"/>
+    <rect x="-8.5" y="-1.25" width="6.5" height="2.5"/>
+    <rect x="2"    y="-1.25" width="6.5" height="2.5"/>
+    <rect x="-8.5" y="4.25"  width="17" height="2.5"/>
   </g>
-  <!-- ☲ Li (bottom-left) — solid·broken·solid -->
-  <g fill="#1a1a2e">
-    <rect x="10" y="37" width="18" height="3" rx="1.2"/>
-    <rect x="10" y="42" width="8" height="3" rx="1.2"/>
-    <rect x="20" y="42" width="8" height="3" rx="1.2"/>
-    <rect x="10" y="47" width="18" height="3" rx="1.2"/>
+  <!-- ☷ Gon (bottom-right) — 3 broken bars — rotate -56.3° -->
+  <g transform="translate(77,50) rotate(-56.31)" fill="#1a1a2e">
+    <rect x="-8.5" y="-6.75" width="6.5" height="2.5"/>
+    <rect x="2"    y="-6.75" width="6.5" height="2.5"/>
+    <rect x="-8.5" y="-1.25" width="6.5" height="2.5"/>
+    <rect x="2"    y="-1.25" width="6.5" height="2.5"/>
+    <rect x="-8.5" y="4.25"  width="6.5" height="2.5"/>
+    <rect x="2"    y="4.25"  width="6.5" height="2.5"/>
   </g>
 </svg>
 </div>
