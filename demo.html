@@ -471,21 +471,6 @@ for (const spk of SPEAKERS) {
   AI_PROCESSED.forEach(a => { g2.innerHTML += card(spk.id, a, "t-ai", "c-ai"); });
   block.appendChild(g2);
 
-  /* PA Attack */
-  const PA_SHOW = [
-    { id:"pa_r1_blue",  name:"BLUE Yeti",      room:"Room 1", device:"LG gram (laptop)",  desc:"Condenser mic · LG gram speaker" },
-    { id:"pa_r2_blue",  name:"BLUE Yeti",       room:"Room 2", device:"Sony BT Speaker",   desc:"Condenser mic · Sony BT speaker" },
-    { id:"pa_r2_croad", name:"Waycos Croad",    room:"Room 2", device:"Sony BT Speaker",   desc:"USB mic · Sony BT speaker" },
-  ];
-  const lb3 = document.createElement("div");
-  lb3.className = "section-label";
-  lb3.innerHTML = `<span class="sec-badge b-pa">PA Attack</span>Physical Access — Replay<span class="sec-count">3 conditions</span>`;
-  block.appendChild(lb3);
-  const g3 = document.createElement("div");
-  g3.className = "samples-grid";
-  PA_SHOW.forEach(a => { g3.innerHTML += paCard(spk.id, a); });
-  block.appendChild(g3);
-
   main.appendChild(block);
 }
 </script>
