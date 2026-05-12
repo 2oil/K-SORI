@@ -389,7 +389,7 @@ function card(spkId, item, tcls, cls) {
   const src = `samples/${spkId}/${item.id}.mp3`;
   return `<div class="sample-card ${cls}">
     <div class="sample-top">
-      <span class="sample-type ${tcls}">${item.id.toUpperCase()}</span>
+      <span class="sample-type ${tcls}">${item.label || item.id.toUpperCase()}</span>
       <span class="sample-name">${item.name}</span>
     </div>
     <div class="sample-cat">${item.cat}</div>
@@ -444,9 +444,9 @@ for (const spk of SPEAKERS) {
   const g0 = document.createElement("div");
   g0.className = "samples-grid";
   const BONAFIDE_SAMPLES = [
-    { id:"a00",  name:"Bonafide 1", cat:"Original", desc:"Authentic speaker recording" },
-    { id:"a00b", name:"Bonafide 2", cat:"Original", desc:"Authentic speaker recording" },
-    { id:"a00c", name:"Bonafide 3", cat:"Original", desc:"Authentic speaker recording" },
+    { id:"a00",  label:"A00", name:"Bonafide 1", cat:"Original", desc:"Authentic speaker recording" },
+    { id:"a00b", label:"A00", name:"Bonafide 2", cat:"Original", desc:"Authentic speaker recording" },
+    { id:"a00c", label:"A00", name:"Bonafide 3", cat:"Original", desc:"Authentic speaker recording" },
   ];
   BONAFIDE_SAMPLES.forEach(b => { g0.innerHTML += card(spk.id, b, "t-bona", "c-bona"); });
   block.appendChild(g0);
