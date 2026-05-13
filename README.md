@@ -1,6 +1,6 @@
 <div align="center">
 
-# K-SORI 🇰🇷
+# K-SORI
 
 **Korean Speech Dataset for Overall Robustness in SASV**
 
