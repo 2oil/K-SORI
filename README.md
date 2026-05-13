@@ -146,7 +146,7 @@ All protocol CSVs are in the [`protocol/`](protocol/) directory.
 
 | Column | Description |
 |--------|-------------|
-| `speaker_norm` | Normalized speaker ID |
+| `speaker_norm` | Speaker ID |
 | `path_audio` | Relative path to audio file |
 | `age` | Speaker age group (Young / Adult / Elder) |
 | `gender` | M / F |
