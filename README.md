@@ -126,7 +126,7 @@ All protocol CSVs are in the [`protocol/`](protocol/) directory.
 
 ### Training Protocols
 
-#### Standard CM (A01–A21 only)
+#### Standard CM (A01–A25 only)
 
 | File | Split | Rows |
 |------|-------|:----:|
