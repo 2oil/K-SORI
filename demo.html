@@ -451,16 +451,6 @@ for (const spk of SPEAKERS) {
   BONAFIDE_SAMPLES.forEach(b => { g0.innerHTML += card(spk.id, b, "t-bona", "c-bona"); });
   block.appendChild(g0);
 
-  /* LA Attack */
-  const lb1 = document.createElement("div");
-  lb1.className = "section-label";
-  lb1.innerHTML = `<span class="sec-badge b-la">LA Attack</span>Logical Access — A01 to A25<span class="sec-count">25 attack types</span>`;
-  block.appendChild(lb1);
-  const g1 = document.createElement("div");
-  g1.className = "samples-grid";
-  LA_ATTACKS.forEach(a => { g1.innerHTML += card(spk.id, a, "t-la", "c-la"); });
-  block.appendChild(g1);
-
   /* AI-Processed */
   const lb2 = document.createElement("div");
   lb2.className = "section-label";
@@ -470,6 +460,16 @@ for (const spk of SPEAKERS) {
   g2.className = "samples-grid";
   AI_PROCESSED.forEach(a => { g2.innerHTML += card(spk.id, a, "t-ai", "c-ai"); });
   block.appendChild(g2);
+
+  /* LA Attack */
+  const lb1 = document.createElement("div");
+  lb1.className = "section-label";
+  lb1.innerHTML = `<span class="sec-badge b-la">LA Attack</span>Logical Access — A01 to A25<span class="sec-count">25 attack types</span>`;
+  block.appendChild(lb1);
+  const g1 = document.createElement("div");
+  g1.className = "samples-grid";
+  LA_ATTACKS.forEach(a => { g1.innerHTML += card(spk.id, a, "t-la", "c-la"); });
+  block.appendChild(g1);
 
   /* PA Attack */
   const lb3 = document.createElement("div");
