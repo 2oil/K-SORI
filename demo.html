@@ -324,7 +324,7 @@
   <span class="badge b-bona">Bonafide</span>
   <span class="badge b-la">LA Attack · A01–A25</span>
   <span class="badge b-ai">AI-Processed · P01–P09</span>
-  <span class="badge b-pa">PA Attack · Replay</span>
+  <span class="badge b-pa">PA Attack · A26 · Replay</span>
 </div>
 
 <main>
@@ -470,6 +470,16 @@ for (const spk of SPEAKERS) {
   g2.className = "samples-grid";
   AI_PROCESSED.forEach(a => { g2.innerHTML += card(spk.id, a, "t-ai", "c-ai"); });
   block.appendChild(g2);
+
+  /* PA Attack */
+  const lb3 = document.createElement("div");
+  lb3.className = "section-label";
+  lb3.innerHTML = `<span class="sec-badge b-pa">PA Attack</span>Physical Access — A26 · Replay Attack<span class="sec-count">6 conditions</span>`;
+  block.appendChild(lb3);
+  const g3 = document.createElement("div");
+  g3.className = "pa-sub-grid";
+  PA_ATTACKS.forEach(a => { g3.innerHTML += paCard(spk.id, a); });
+  block.appendChild(g3);
 
   main.appendChild(block);
 }
