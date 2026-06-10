@@ -330,7 +330,7 @@
 <main>
 <script>
 const SPEAKERS = [
-  { id:"9038",      gender:"M", env:"Studio",       label:"Studio_M", desc:"Studio Recording" },
+  { id:"396",        gender:"M", env:"Studio",       label:"Studio_M", desc:"Studio Recording" },
   { id:"10",        gender:"F", env:"Studio",       label:"Studio_F", desc:"Studio Recording" },
   { id:"ITW_00001", gender:"M", env:"In-the-Wild",  label:"ITW_M",    desc:"In-the-Wild Recording" },
   { id:"ITW_00002", gender:"F", env:"In-the-Wild",  label:"ITW_F",    desc:"In-the-Wild Recording" },
@@ -377,12 +377,9 @@ const AI_PROCESSED = [
 ];
 
 const PA_ATTACKS = [
-  { id:"pa_r1_blue",    name:"BLUE Mic",         room:"Room 1", device:"LG gram (laptop)",    desc:"Condenser mic · LG gram speaker"  },
-  { id:"pa_r1_brio",    name:"Logitech BRIO",    room:"Room 1", device:"LG gram (laptop)",    desc:"Webcam mic · LG gram speaker"     },
   { id:"pa_r1_iriver",  name:"IRIVER",           room:"Room 1", device:"LG gram (laptop)",    desc:"Headphone mic · LG gram speaker"  },
   { id:"pa_r2_blue",    name:"BLUE Mic",         room:"Room 2", device:"Sony BT Speaker",     desc:"Condenser mic · Sony BT speaker"  },
   { id:"pa_r2_croad",   name:"Waycos Croad",     room:"Room 2", device:"Sony BT Speaker",     desc:"USB mic · Sony BT speaker"        },
-  { id:"pa_r2_samsung", name:"Samsung Galaxy",   room:"Room 2", device:"Sony BT Speaker",     desc:"Laptop mic · Sony BT speaker"     },
 ];
 
 function card(spkId, item, tcls, cls) {
@@ -474,7 +471,7 @@ for (const spk of SPEAKERS) {
   /* PA Attack */
   const lb3 = document.createElement("div");
   lb3.className = "section-label";
-  lb3.innerHTML = `<span class="sec-badge b-pa">PA Attack</span>Physical Access — A26 · Replay Attack<span class="sec-count">6 conditions</span>`;
+  lb3.innerHTML = `<span class="sec-badge b-pa">PA Attack</span>Physical Access — A26 · Replay Attack<span class="sec-count">3 conditions</span>`;
   block.appendChild(lb3);
   const g3 = document.createElement("div");
   g3.className = "pa-sub-grid";
